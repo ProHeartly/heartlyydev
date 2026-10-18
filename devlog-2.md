@@ -23,3 +23,8 @@ And I will layoff base of backend too
     ![alt text](images/image6.png)
 
     which is changed by clicking the sun and moon icon respectively :)
+
+* ### Added fastapi backend:
+    ![alt text](image.png)
+
+    So I made basic structure of the backend to work, for now its doing nothing but just for fancy but it might come in handy for future when we decide to add blogs
