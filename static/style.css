@@ -135,8 +135,7 @@ body {
     overflow: hidden;
     padding: 16px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
@@ -174,21 +173,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.card.a .sleeve {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-
-    border-radius: 8px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    z-index: 4;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card.a .record {
