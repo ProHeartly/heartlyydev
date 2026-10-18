@@ -129,3 +129,113 @@ body {
 .card.g {
     width: calc(60vw - 32px);
 }
+
+.card.a {
+    position: relative;
+    overflow: hidden;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card.a .track-front,
+.card.a .track-back {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: 4rem;
+
+    text-align: center;
+    transition: color 0.4 ease;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card.a .track-back {
+    color: var(--text-color);
+    z-index: 1;
+}
+
+.card.a .track-front {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--text-color);
+    z-index: 3;
+}
+
+.card.a .record-wrapper {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card.a .sleeve {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+
+    border-radius: 8px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 4;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card.a .record {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    cursor: pointer;
+    
+    background: 
+        conic-gradient(from 0deg,
+            transparent 0deg, rgba(255, 255, 255, 0.15) 40deg, transparent 90deg,
+            transparent 180deg, rgba(255, 255, 255, 0.15) 220deg, transparent 270deg),
+        repeating-radial-gradient(circle,
+            rgba(0, 0, 0, 0.1) 0 1px, transparent 1px 3px),
+        var(--card-bg);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    animation: spin 8s linear infinite;
+    animation-play-state: paused;
+    transition: background-color 0.4s ease;
+}
+
+.card.a .record.playing {
+    animation-play-state: running;
+}
+
+.card.a .record .label {
+    width: 48%;
+    height: 48%;
+    border-radius: 50%;
+    border: 2px solid var(--bg-color);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: inset 0 0 0 2px var(--card-bg);
+    transition: border-color 0.4 ease;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
