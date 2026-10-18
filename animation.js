@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
         card.style.transitionDelay = `${(index * 0.1).toFixed(2)}s`;
     });
 
-    const obserber = new IntersectionObserver((entries, observer) => {
+    const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add("in-view");
@@ -17,5 +17,5 @@ document.addEventListener("DOMContentLoaded", () => {
         root: container,
         threshold: 0.15
     });
-    cards.forEach(card => obserber.observe(card));
+    cards.forEach(card => observer.observe(card));
 });

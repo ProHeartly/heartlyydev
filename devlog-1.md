@@ -22,3 +22,9 @@ So this is kinda like rough sketch of my vision. What I'm thinking is, it should
 
 * ### Lets make animation now:
     I made animation that plays when first time loading that card, it flyIn from down with smooth cubic bezier function `cubic-bezier(0.16, 1, 0.3, 1)`, this makes the animation really smooth.
+
+* ### Vertical scroll converted to horizontal scroll:
+    basically now when you normally scroll, the `scroll.js` captures it, and converts that into `container.scrollLeft += e.deltaY ;` the container scrolling horizontally.
+    And i also fixed a minor spelling mistake: turns our I spelled `observer` as `obserber` in `animation.js`.
+
+    But still, the scrolling thing looks choppy, so I might add the accelerated scrolling effect.

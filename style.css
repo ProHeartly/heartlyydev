@@ -14,10 +14,12 @@ body {
 
 .main {
     height: 100vh;
-    width: auto;
+    width: 100vw;
     padding: 16px;
+
     overflow-x: auto;
-    scroll-behavior: smooth;
+    overflow-y: hidden;
+
     scrollbar-width: none;
 
     display: flex;
