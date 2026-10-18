@@ -12,3 +12,11 @@ So this is kinda like rough sketch of my vision. What I'm thinking is, it should
     ![p1](images/image1.png)
     This is how its looking..
 
+    I kept little variations in the width of cards to `40vw (small ones), 80vw (big ones) and 60vw (transition ones)`. Transition ones are there to help the layout look deliberate typa.
+
+* ### Made underline:
+    ![alt text](images/image2.png)
+    I made this cutie underline effect on hover after a long trial and error for value of offset ;-;
+    `text-decoration-thickness: 0.5rem;
+    text-underline-offset: 0.7rem;`
+
