@@ -28,3 +28,6 @@ So this is kinda like rough sketch of my vision. What I'm thinking is, it should
     And i also fixed a minor spelling mistake: turns our I spelled `observer` as `obserber` in `animation.js`.
 
     But still, the scrolling thing looks choppy, so I might add the accelerated scrolling effect.
+
+* ### I made da scrolling accelerated:
+    So how this works is; `velocity += e.deltaY * 0.18;` this provides the momentum build-up which means if its scrolling then it builds up the momentum and `velocity *= 0.92;` this line inside the `Animate` function acts as damping or friction to eventually stop the velocity. Here, I experimented with different values of them and found `0.92` for friction and `0.18` for momentum as good!
