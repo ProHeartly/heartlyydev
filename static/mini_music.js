@@ -7,7 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const recordEl = document.getElementById("record");
     const labelEl = document.getElementById("label");
 
+    const listenBtn = document.getElementById("listen-btn");
+    const listenText = document.getElementById("listen-text");
+
     let lastTrackKey = "";
+    let currentTrackUrl = "";
 
     function updateTrackText(text) {
         trackBackEl.textContent = text;
@@ -24,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         labelEl.style.backgroundImage = `url("${albumArtUrl}")`;
 
+        listenText.textContent = "Search this song"
     }
 
     function setIdle() {
@@ -34,6 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
         labelEl.style.backgroundImage = `none`;
 
         lastTrackKey = "";
+
+        listenText.textContent = "Check last.fm profile";
     }
 
     async function fetchNowPlaying() {
@@ -59,6 +66,17 @@ document.addEventListener("DOMContentLoaded", () => {
             setIdle();
         }
     }
+
+    listenBtn.addEventListener("click", () => {
+        const trackName = trackBackEl.textContent.trim();
+
+        if (trackName && trackName !== "Connecting..." && trackName !== "Not listening to anything") {
+            const ytSearchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(trackName)}`;
+            window.open(ytSearchUrl, "_blank", "noopener,noreferrer");
+        } else {
+            window.open(`https://www.last.fm/user/${USERNAME}`, "_blank", "noopener,noreferrer");
+        }
+    });
 
     fetchNowPlaying();
     setInterval(fetchNowPlaying, 10000);
