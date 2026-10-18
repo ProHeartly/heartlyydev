@@ -20,3 +20,5 @@ So this is kinda like rough sketch of my vision. What I'm thinking is, it should
     `text-decoration-thickness: 0.5rem;
     text-underline-offset: 0.7rem;`
 
+* ### Lets make animation now:
+    I made animation that plays when first time loading that card, it flyIn from down with smooth cubic bezier function `cubic-bezier(0.16, 1, 0.3, 1)`, this makes the animation really smooth.
