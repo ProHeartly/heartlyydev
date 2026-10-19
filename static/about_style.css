@@ -1,0 +1,85 @@
+:root, [data-theme="dark"] {
+    --bg-color: #09002f;
+    --card-bg: #120b3d;
+    --text-color: #a1b1ff;
+}
+
+[data-theme="light"] {
+    --bg-color: #f4f5fc;
+    --card-bg: #cfd3ff;
+    --text-color: #004EB9;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: "Space Grotesk", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    overflow-x: hidden;
+}
+
+.back {
+    text-decoration: none;
+}
+
+.back p {
+    padding: 16px;
+    font-size: 2rem;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.about {
+    text-align: center;
+    width: 100vw;
+    height: auto;
+}
+
+.about h1 {
+    color: var(--text-color);
+    height: auto;
+    width: 100%;
+    margin: auto;
+
+    font-stretch: ultra-condensed;
+    font-weight: 900;
+
+    font-size: clamp(5rem, 18vw, 22rem);
+    line-height: 1.1;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.image {
+    max-width: 760px;
+    margin: 40px auto;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image img {
+    width: 100%;
+    max-width: 680px;
+    height: 500px;
+    object-fit: cover;
+    object-position: center;
+    margin-bottom: 32px;
+}
+
+.about-text {
+    color: var(--text-color);
+    font-size: 2rem;
+    line-height: 1.6;
+}
