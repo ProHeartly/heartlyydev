@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heartly | My gallery</title>
+    <link rel="stylesheet" href="/static/gallery_style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <a href="/" class="back">
+        <p><i class="ph-duotone ph-caret-left"></i> <b>Back</b></p>
+    </a>
+    <div class="title">
+        <h1>My Gallery</h1>
+        <p>Maybe some random photos</p>
+    </div>
+
+    <hr>
+    <hr>
+
+    <div class="photos">
+        {% for img in images %}
+        <div class="photo">
+            <img src="{{ url_for('gallery', path=img.file) }}" alt="{{ img.caption }}">
+            <p>{{ img.caption }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script src="/static/theme.js"></script>
+</body>
+</html>
