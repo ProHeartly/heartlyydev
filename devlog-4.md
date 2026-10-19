@@ -8,7 +8,7 @@ I will work on it when I get some idea for it!
 Beside that, lets work on galleryy! I wana make smth like [this](https://proheartly.github.io/my-gallery/) with custom font and all :D
 
 **forgot to mention!**
-I hosted this in nest thingy, it took me a while, **A WHILE** to host it but finally its hosted in [this](https://site.heartly.hackclub.app)
+I hosted this in nest thingy, it took me a while, **A WHILE** to host it but finally its hosted in [this](https://heartly.dev) (and yahhhh I used my custom domain :D)
 
 **Made the gallery!**
 ![alt text](images/image11.png)
@@ -46,3 +46,8 @@ and using:
 </div>
 ```
 it creates the automatic gallery thingy :)
+
+**small qol:**
+![alt text](images/image12.png)
+
+Erm there was no context to what the song was soo, I added a little what it is, which also disappears when I'm not listening to anything.

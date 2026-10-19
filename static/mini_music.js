@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const trackFrontEl = document.getElementById("track-front");
     const recordEl = document.getElementById("record");
     const labelEl = document.getElementById("label");
+    const what = document.getElementById("what");
 
     const listenBtn = document.getElementById("listen-btn");
     const listenText = document.getElementById("listen-text");
@@ -29,6 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
         labelEl.style.backgroundImage = `url("${albumArtUrl}")`;
 
         listenText.textContent = "Search this song"
+
+        what.classList.remove("hidden");
     }
 
     function setIdle() {
@@ -41,6 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
         lastTrackKey = "";
 
         listenText.textContent = "Check last.fm profile";
+
+        what.classList.add("hidden");
     }
 
     async function fetchNowPlaying() {
