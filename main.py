@@ -12,11 +12,11 @@ src = Jinja2Templates(directory="src")
 
 @app.get("/")
 def index(request: Request):
-    return src.TemplateResponse("index.html", {"request": request})
+    return src.TemplateResponse(request=request, name="index.html")
 
 @app.get("/about")
 def about(request: Request):
-    return src.TemplateResponse("about.html", {"request": request})
+    return src.TemplateResponse(request=request, name="about.html")
 
 if __name__ == "__main__":
     import uvicorn
