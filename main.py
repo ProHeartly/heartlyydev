@@ -1,4 +1,6 @@
 import os
+import time
+import secrets
 from pathlib import Path
 from fastapi import FastAPI, Request, UploadFile, File, Form
 from fastapi.staticfiles import StaticFiles
@@ -7,10 +9,35 @@ from fastapi.responses import RedirectResponse
 import json
 from starlette.middleware.sessions import SessionMiddleware
 
+import dns.resolver, dkim, smtplib
+from email.message import EmailMessage
+
 from dotenv import load_dotenv
 load_dotenv()
 
-ADMIN_CODE = os.environ.get("ADMIN_CODE")
+ADMIN_MAIL = os.environ.get("ADMIN_MAIL")
+
+DKIM_KEY = open("dkim_private.pem", 'rb').read()
+
+current_code = None
+code_time = 0
+
+# this sends the code to our mail
+def send_code(code):
+    msg = EmailMessage()
+    msg["Subject"] = f"Your code: {code}"
+    msg["From"] = "code@heartlyy.dev"
+    msg["To"] = ADMIN_MAIL
+    msg.set_content(f"Your login code is {code}")
+
+    raw = msg.as_bytes()
+    sig = dkim.sign(raw, b"mail", b"heartlyy.dev", DKIM_KEY, include_headers=[b"From", b"To", b"Subject"])
+
+    domain = ADMIN_MAIL.split("@")[1]
+    mx = sorted(dns.resolver.resolve(domain, "MX"), key=lambda r: r.preference)[0]
+    with smtplib.SMTP(mx.exchange.to_text(), 25) as s:
+        s.starttls()
+        s.sendmail("code@heartlyy.dev", [ADMIN_MAIL], sig + raw)
 
 app = FastAPI()
 app.add_middleware(SessionMiddleware, secret_key=os.environ.get("SESSION_SECRET"), max_age=None)
@@ -56,10 +83,20 @@ def upload_page(request: Request):
         context={"logged_in": request.session.get("admin", False)}
     )
 
+@app.post("/gallery-upload/send-code")
+def send_code_route():
+    global current_code, code_time
+    current_code = f"{secrets.randbelow(1000000):06d}"
+    code_time = time.time()
+    send_code(current_code)
+    return RedirectResponse("/gallery-upload", status_code=303)
+
 @app.post("/gallery-upload/login")
 def login(request: Request, code: str = Form(...)):
-    if code == ADMIN_CODE:
-        request.session["admin"]= True
+    global current_code
+    if current_code and code == current_code and time.time() - code_time < 600:
+        request.session["admin"] = True
+        current_code = None
     return RedirectResponse("/gallery-upload", status_code=303)
 
 @app.post("/gallery-upload")

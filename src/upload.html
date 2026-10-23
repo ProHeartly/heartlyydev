@@ -16,6 +16,9 @@
     <p><a href="/gallery">View gallery</a></p>
     {% else %}
     <h1>Enter code</h1>
+    <form action="/gallery-upload/send-code" method="post">
+        <button type="submit">Email me a code</button>
+    </form>
     <form action="/gallery-upload/login" method="post">
         <input type="password" name="code" inputmode="numeric" maxlength="6" required>
         <button type="submit">Enter</button>
