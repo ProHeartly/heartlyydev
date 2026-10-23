@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heartlyy | upload</title>
+</head>
+<body>
+    {% if logged_in %}
+    <h1>Upload a photo</h1>
+    <form action="/gallery-upload" method="post" enctype="multipart/form-data">
+        <p><input type="file" name="photo" accept="image/*" required></p>
+        <p><input type="text" name="caption" placeholder="caption"></p>
+        <button type="submit">Upload</button>
+    </form>
+    <p><a href="/gallery">View gallery</a></p>
+    {% else %}
+    <h1>Enter code</h1>
+    <form action="/gallery-upload/login" method="post">
+        <input type="password" name="code" inputmode="numeric" maxlength="6" required>
+        <button type="submit">Enter</button>
+    </form>
+    {% endif %}
+</body>
+</html>
