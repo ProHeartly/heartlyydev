@@ -9,15 +9,14 @@ from fastapi.responses import RedirectResponse
 import json
 from starlette.middleware.sessions import SessionMiddleware
 
-import dns.resolver, dkim, smtplib
+import smtplib
 from email.message import EmailMessage
 
 from dotenv import load_dotenv
 load_dotenv()
 
 ADMIN_MAIL = os.environ.get("ADMIN_MAIL")
-
-DKIM_KEY = open("dkim_private.pem", 'rb').read()
+MAIL_PASS = os.environ.get("MAIL_PASS")
 
 current_code = None
 code_time = 0
@@ -26,18 +25,14 @@ code_time = 0
 def send_code(code):
     msg = EmailMessage()
     msg["Subject"] = f"Your code: {code}"
-    msg["From"] = "code@heartlyy.dev"
+    msg["From"] = "heartly@user.hackclub.app"
     msg["To"] = ADMIN_MAIL
     msg.set_content(f"Your login code is {code}")
 
-    raw = msg.as_bytes()
-    sig = dkim.sign(raw, b"mail", b"heartlyy.dev", DKIM_KEY, include_headers=[b"From", b"To", b"Subject"])
-
-    domain = ADMIN_MAIL.split("@")[1]
-    mx = sorted(dns.resolver.resolve(domain, "MX"), key=lambda r: r.preference)[0]
-    with smtplib.SMTP(mx.exchange.to_text(), 25) as s:
+    with smtplib.SMTP("mx.user.hackclub.app", 587, timeout=20) as s:
         s.starttls()
-        s.sendmail("code@heartlyy.dev", [ADMIN_MAIL], sig + raw)
+        s.login("heartly@user.hackclub.app", MAIL_PASS)
+        s.send_message(msg)
 
 app = FastAPI()
 app.add_middleware(SessionMiddleware, secret_key=os.environ.get("SESSION_SECRET"), max_age=None)
