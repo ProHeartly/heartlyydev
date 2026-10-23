@@ -8,7 +8,7 @@ import json
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
-app.mount("/gallery", StaticFiles(directory="content/gallery"), name="gallery")
+app.mount("/photos", StaticFiles(directory="content/gallery"), name="photos")
 
 src = Jinja2Templates(directory="src")
 
