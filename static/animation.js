@@ -2,20 +2,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const cards = document.querySelectorAll(".card");
     const container = document.querySelector(".main");
 
-    cards.forEach((card, index) => {
-        card.style.transitionDelay = `${(index * 0.1).toFixed(2)}s`;
-    });
-
-    const observer = new IntersectionObserver((entries, observer) => {
+    const observer = new IntersectionObserver(entries => {
+        let i = 0;
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                entry.target.style.setProperty("--delay", `${i * 0.08}s`);
                 entry.target.classList.add("in-view");
-                observer.unobserve(entry.target);
+                i++;
+            } else {
+                entry.target.classList.remove("in-view");
             }
         });
-    }, {
-        root: container,
-        threshold: 0.15
-    });
+    }, {root: container, threshold: 0.15});
+
     cards.forEach(card => observer.observe(card));
 });
