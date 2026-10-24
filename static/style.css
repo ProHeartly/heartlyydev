@@ -4,6 +4,12 @@
     --text-color: #a1b1ff;
 }
 
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
 [data-theme="light"] {
     --bg-color: #f4f5fc;
     --card-bg: #cfd3ff;
