@@ -7,5 +7,9 @@ I mean isn't the about me page most important?? Soooo I'm gonnna remake it into 
 ### Idea:
 So what i have in mind is a kinda unique mixture of kinda Bento styled design(like everything in card like in home page), and a selection where viewer can pick how much time he has to look at our profile, and our site transforms(morph animation if possible) into more informatic or more precise according to the time they have.
 
+![alt text](/images/image25.png)
+![alt text](/images/image26.png)
+![alt text](/images/image27.png)
+
 # Progress:
 1) 
