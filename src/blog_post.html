@@ -1,0 +1,27 @@
+{% extends "blog_base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+{% block edition %}{{ board }} Section{% endblock %}
+
+{% block content %}
+<nav class="crumbs">
+    <a href="/blogs">Front Page</a>
+    <span>,</span>
+    <a href="/blogs/{{ board | urlencode }}"><i class="ph-duotone ph-folder-open"></i></a>
+    <span>,</span>
+    <span class="here">{{ post.title }}</span>
+</nav>
+
+<article class="article">
+    <header class="article-head">
+        <h1 class="article-headline">{{ post.title }}</h1>
+        <p class="kicker">{{ post.date }}</p>
+    </header>
+
+    <div class="article-body">
+        {{ post.html | safe }}
+    </div>
+</article>
+
+<a class="back" href="/blogs/{{ board | urlencode }}">← More from {{ board }}</a>
+{% endblock %}

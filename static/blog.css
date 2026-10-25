@@ -137,7 +137,9 @@
     color: var(--muted);
 }
 
-.front-item:hover h2 {
+.front-item:hover h2,
+.lead:hover h2,
+.story:hover h3 {
     text-decoration: underline;
     text-decoration-thickness: 2px;
     text-underline-offset: 5px;

@@ -180,6 +180,22 @@ def blog_board(request: Request, board: str):
         }
     )
 
+@app.get("/blogs/{board}/{post}")
+def blog_post(request: Request, board: str, post: str):
+    file = blogs_dir / board / f"{post}.md"
+    if ".." in board or ".." in post or not file.is_file():
+        raise HTTPException(status_code=404)
+
+    return src.TemplateResponse(
+        request=request,
+        name="blog_post.html",
+        context={
+            "board": board,
+            "post": read_post(file),
+            "today": date.today().strftime("%B %d, %Y")
+        }
+    )
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)

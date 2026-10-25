@@ -20,4 +20,6 @@ Like each blog pages are inside folder type with a label so we can manage them p
 ![alt text](/images/image21.png)
 basically, this is the collection of pages which are in the folder :D
 
-4) 
+4) Sooo the pages of blog is also completed
+![alt text](/images/image22.png)
+Uhh from here I see styling is left and the images are not loading soo I will be searching how to load images later and in mean time, making the styling :)
