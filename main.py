@@ -77,7 +77,6 @@ def read_post(file):
         "date": info.get("date", ""),
         "summary": info.get("summary", first_line),
         "has_summary": "summary" in info,
-        "minutes": max(1, len(text.split()) // 200),
         "html": markdown.markdown(text, extensions=["fenced_code", "tables"])
     }
 
@@ -163,6 +162,22 @@ def blogs(request: Request):
         request=request,
         name="blogs.html",
         context={"boards": boards, "today": date.today().strftime("%B %d, %Y")},
+    )
+
+@app.get("/blogs/{board}")
+def blog_board(request: Request, board: str):
+    folder = blogs_dir / board
+    if ".." in board or not folder.is_dir():
+        raise HTTPException(status_code=404)
+
+    return src.TemplateResponse(
+        request=request,
+        name="blog_board.html",
+        context={
+            "board": board,
+            "posts": get_posts(folder),
+            "today": date.today().strftime("%B %d, %Y")
+        }
     )
 
 if __name__ == "__main__":

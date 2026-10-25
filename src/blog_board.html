@@ -1,0 +1,28 @@
+{% extends "blog_base.html" %}
+
+{% block title %}{{ board }}{% endblock %}
+{% block edition %}{{ board }} Selection{% endblock %}
+
+{% block content %}
+<nav class="crumbs">
+    <a href="/blogs">Front Page</a>
+    <span>,</span>
+    <span class="here"><i class="ph-duotone ph-folder-open"></i> {{ board }}</span>
+</nav>
+
+{% set lead = posts[0] %}
+<a href="/blogs/{{ board | urlencode }}/{{ lead.slug | urlencode }}" class="lead">
+    <p class="kicker">Latest</p>
+    <h2 class="lead-headline">{{ lead.title }}</h2>
+    <p class="lead-excerpt">{{ lead.summary }}</p>
+</a>
+
+<section class="columns">
+    {% for p in posts[1:] %}
+    <a href="/blogs/{{ board | urlencode }}/{{ p.slug | urlencode }}" class="story">
+        <h3 class="story-headline">{{ p.title }}</h3>
+        <p class="story-excerpt">{{ p.summary }}</p>
+    </a>
+    {% endfor %}
+</section>
+{% endblock %}

@@ -143,6 +143,91 @@
     text-underline-offset: 5px;
 }
 
+.lead {
+    display: block;
+    text-align: center;
+
+    padding-bottom: 28px;
+    margin-bottom: 28px;
+    border-bottom: 4px double var(--rule-strong);
+}
+
+.lead .kicker {
+    justify-content: center;
+}
+
+.lead-headline {
+    font-family: "Playfair Display", Georgia, Serif;
+    font-weight: 900;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    
+    max-width: 18ch;
+    margin: 0 auto;
+}
+
+.lead-excerpt {
+    font-style: italic;
+    font-size: 1.2rem;
+
+    max-width: 60ch;
+    margin: 14px auto 0;
+}
+
+.crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 24px;
+}
+
+.crumbs a,
+.crumbs .here {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.crumbs a:hover {
+    text-decoration: underline;
+    color: var(--ink);
+}
+
+.crumbs .here {
+    color: var(--ink);
+    font-weight: 600;
+}
+
+.columns {
+    columns: 3 240px;
+    column-gap: 36px;
+    column-rule: 1px solid var(--rule);
+}
+
+.story {
+    display: block;
+    break-inside: avoid;
+
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--rule);
+}
+
+.story-headline {
+    font-family: "Playfair Display", Georgia, serif;
+    font-weight: 700;
+    font-size: 1.45rem;
+}
+
+.story-excerpt {
+    margin-top: 6px;
+    color: var(--muted);
+}
+
 .paper-foot {
     max-width: 1100px;
     margin: 0 auto;

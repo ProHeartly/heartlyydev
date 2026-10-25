@@ -15,3 +15,9 @@ Like each blog pages are inside folder type with a label so we can manage them p
 
 2) Done with board styled page where all the main blogs are displayed
 ![alt text](/images/image20.png)
+
+3) I finished the boards pages:
+![alt text](/images/image21.png)
+basically, this is the collection of pages which are in the folder :D
+
+4) 
