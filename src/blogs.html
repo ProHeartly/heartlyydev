@@ -1,0 +1,21 @@
+{% extends "blog_base.html" %}
+
+{% block title %}Blogs{% endblock %}
+{% block edition %}Front Page{% endblock %}
+
+{% block content %}
+<section class="front">
+    {% for b in boards %}
+    <a class="front-item" href="/blogs/{{ b.name | urlencode }}">
+        <div class="kicker">
+            <i class="ph-duotone ph-folder"></i>
+            <span>{{ b.count }} pages</span>
+        </div>
+        <h2 class="front-headline">{{ b.name }}</h2>
+        <p class="front-latest">Latest: <em>{{ b.latest.title }}</em></p>
+        <p class="front-excerpt">{{ b.latest.summary }}</p>
+        <p class="byline">{{ b.latest.date }}</p>
+    </a>
+    {% endfor %}
+</section>
+{% endblock %}

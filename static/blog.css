@@ -81,6 +81,68 @@
     padding: 20px 16px 48px;
 }
 
+.kicker {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 0.78rem;
+
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.kicker i {
+    font-size: 8rem;
+    color: var(--ink);
+}
+
+.byline {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 10px;
+}
+
+.front {
+    columns: 3 280px;
+    column-gap: 40px;
+    column-rule: 1px solid var(--rule);
+}
+
+.front-item {
+    display: block;
+    break-inside: avoid;
+
+    padding-bottom: 22px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid var(--rule);
+}
+
+.front-headline {
+    font-family: "Playfair Display", Georgia, serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+
+.front-latest {
+    margin-top: 6px;
+    font-size: 1.05rem;
+}
+
+.front-excerpt {
+    margin-top: 6px;
+    color: var(--muted);
+}
+
+.front-item:hover h2 {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
+}
+
 .paper-foot {
     max-width: 1100px;
     margin: 0 auto;

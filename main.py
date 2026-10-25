@@ -77,7 +77,7 @@ def read_post(file):
         "date": info.get("date", ""),
         "summary": info.get("summary", first_line),
         "has_summary": "summary" in info,
-        "minutes": max(1, len(text.splite()) // 200),
+        "minutes": max(1, len(text.split()) // 200),
         "html": markdown.markdown(text, extensions=["fenced_code", "tables"])
     }
 

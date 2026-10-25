@@ -11,7 +11,7 @@ Sooo, I went on a short vacation without my laptop, therefore, I couldn't work o
 
 ## Progress:
 1) Made animation that I was thinking of:
-    ![gif](images/animation.gif)
+    ![gif](/images/animation.gif)
     this was done by adding `transform: translateY(140px);` to `.card`. But I remembered, I want two types of animation (from up and down), so i added 
     ```
     .row:first-child .card:not(.in-view) {
@@ -21,7 +21,7 @@ Sooo, I went on a short vacation without my laptop, therefore, I couldn't work o
     this makes the top thingy move `-140px` (up).
 
 2) Made the about me pageee:
-    ![alt text](images/image13.png)
+    ![alt text](/images/image13.png)
     This is the current look of about me page and ofc it also has the theme change :)
 
-    ![alt text](images/image14.png)
+    ![alt text](/images/image14.png)
