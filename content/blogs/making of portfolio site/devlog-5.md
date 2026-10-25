@@ -21,7 +21,7 @@ Sooo, I went on a short vacation without my laptop, therefore, I couldn't work o
     this makes the top thingy move `-140px` (up).
 
 2) Made the about me pageee:
-    ![alt text](/images/image13.png)
-    This is the current look of about me page and ofc it also has the theme change :)
+![alt text](/images/image13.png)
+This is the current look of about me page and ofc it also has the theme change :)
 
-    ![alt text](/images/image14.png)
+![alt text](/images/image14.png)

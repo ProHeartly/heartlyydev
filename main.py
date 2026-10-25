@@ -41,6 +41,7 @@ app.add_middleware(SessionMiddleware, secret_key=os.environ.get("SESSION_SECRET"
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.mount("/photos", StaticFiles(directory="content/gallery"), name="photos")
+app.mount("/images", StaticFiles(directory="images"), name="images")
 
 src = Jinja2Templates(directory="src")
 

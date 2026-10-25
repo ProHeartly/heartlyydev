@@ -23,3 +23,7 @@ basically, this is the collection of pages which are in the folder :D
 4) Sooo the pages of blog is also completed
 ![alt text](/images/image22.png)
 Uhh from here I see styling is left and the images are not loading soo I will be searching how to load images later and in mean time, making the styling :)
+
+5) Finally working blogsss YAYYYY
+![alt text](/images/image23.png)
+and for fixing image loading, I just mounted images dir with `app.mount("/images", StaticFiles(directory="images"), name="images")`
