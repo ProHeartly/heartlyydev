@@ -1,8 +1,10 @@
 import os
 import time
 import secrets
+import markdown
+from datetime import date
 from pathlib import Path
-from fastapi import FastAPI, Request, UploadFile, File, Form
+from fastapi import FastAPI, Request, UploadFile, File, Form, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
@@ -44,6 +46,45 @@ src = Jinja2Templates(directory="src")
 
 gallery_path = Path("content/gallery")
 caption_path = Path("content/caption.json")
+
+blogs_dir = Path("content/blogs")
+
+def read_post(file):
+    text = file.read_text(encoding="utf-8")
+    info = {}
+
+    # optional info block at the top:
+    # ---
+    # title: ...
+    # date: 2026-10-24
+    # summary: ...
+    # ---
+    if text.startswith("---"):
+        _, top, text = text.split("---", 2)
+        for line in top.strip().splitlines():
+            key, value = line.split(":", 1)
+            info[key.strip()] = value.strip()
+
+    first_line = ""
+    for line in text.splitlines():
+        if line.strip() and not line.startswith(("#", "```", ">", "|", "-")):
+            first_line = line.strip()
+            break
+
+    return {
+        "slug": file.stem,
+        "title": info.get("title", file.stem),
+        "date": info.get("date", ""),
+        "summary": info.get("summary", first_line),
+        "has_summary": "summary" in info,
+        "minutes": max(1, len(text.splite()) // 200),
+        "html": markdown.markdown(text, extensions=["fenced_code", "tables"])
+    }
+
+def get_posts(folder):
+    posts = [read_post(f) for f in folder.glob("*.md")]
+    posts.sort(key=lambda p: (p["date"], p["slug"]), reverse=True)
+    return posts
 
 @app.get("/")
 def index(request: Request):
@@ -107,6 +148,22 @@ async def upload(request: Request, photo: UploadFile = File(...), caption: str =
     caption_path.write_text(json.dumps(captions, indent=2), encoding="utf-8")
 
     return RedirectResponse("/gallery-upload", status_code=303)
+
+@app.get("/blogs")
+def blogs(request: Request):
+    boards = []
+    for folder in sorted(blogs_dir.iterdir()):
+        posts = get_posts(folder)
+        boards.append({
+            "name": folder.name,
+            "count": len(posts),
+            "latest": posts[0] if posts else None
+        })
+    return src.TemplateResponse(
+        request=request,
+        name="blogs.html",
+        context={"boards": boards, "today": date.today().strftime("%B %d, %Y")},
+    )
 
 if __name__ == "__main__":
     import uvicorn
