@@ -12,6 +12,12 @@
     --text-color: #004EB9;
 }
 
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -33,7 +39,7 @@ a {
 
 .top {
     margin: 0 auto;
-    padding: 24px 16px 8px;
+    padding: 16px 48px;
 
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -58,24 +64,29 @@ a {
 }
 
 .picker p {
+    font-size: 3rem;
     margin-bottom: 10px;
 }
 
 .levels {
-    display: flex;
-    gap: 8px;
+    display: inline-flex;
+    gap: 4px;
+    padding: 4px;
 }
 
 .levels button {
     background: none;
-    border: 2px solid var(--card-bg);
-    border-radius: 10%;
+    border: none;
     color: var(--text-color);
 
     font-family: inherit;
     font-size: 0.95rem;
-    pad: 6px 18px;
+    padding: 8px 20px;
     transition: background 0.3s;
+}
+
+.levels button:hover {
+    border: 1px solid var(--card-bg);
 }
 
 .levels button.active {
@@ -91,4 +102,65 @@ a {
     font-size: 2rem;
     cursor: pointer;
     display: inline-flex;
+}
+
+.grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 16px 48px;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 16px;
+}
+
+.box {
+    background: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    transform-origin: top left;
+}
+
+.inner {
+    height: 100%;
+    padding: 24px;
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 500;
+}
+
+.hero p {
+    font-size: 1.15rem;
+    margin-top: 14px;
+}
+
+.photo .inner {
+    padding: 0;
+}
+ 
+.photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hi {
+    grid-column: 1 / -1;
+}
+
+.hi .inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5rem;
+    padding: 28px;
+    text-align: center;
+}
+
+.hi:hover {
+    text-decoration: underline;
 }
