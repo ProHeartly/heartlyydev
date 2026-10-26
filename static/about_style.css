@@ -76,7 +76,7 @@ a {
 
 .levels button {
     background: none;
-    border: none;
+    border: 1px solid transparent;
     color: var(--text-color);
 
     font-family: inherit;
@@ -163,4 +163,80 @@ a {
 
 .hi:hover {
     text-decoration: underline;
+}
+
+.l1 .from-l2 {
+    display: none;
+}
+
+::view-transition-image-pair(*) {
+    animation: motion-blur 0.8s ease;
+}
+
+::view-transition-new(*):only-child {
+    animation: focus-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+::view-transition-old(*):only-child {
+    animation: focus-out 0.5s ease-in forwards;
+}
+
+::view-transition-new(stats):only-child {
+    animation-delay: 0.08s;
+}
+
+@keyframes focus-in {
+    from {
+        opacity: 0;
+        filter: blur(16px);
+        transform: scale(1.05);
+    }
+}
+
+@keyframes focus-out {
+    to {
+        opacity: 0;
+        filter: blur(16px);
+        transform: scale(0.97);
+    }
+}
+
+.stats img {
+    width: 100%;
+}
+
+.stats-dark {
+    display: block;
+}
+
+.stats-light {
+    display: none;
+}
+
+[data-theme="light"] .stats-dark {
+    display: none;
+}
+
+[data-theme="light"] .stats-light {
+    display: block;
+}
+
+.morphing .hero {
+    view-transition-name: hero;
+}
+
+.morphing .photo {
+    view-transition-name: photo;
+}
+
+.morphing .story {
+    view-transition-name: story;
+}
+
+.morphing .stats {
+    view-transition-name: stats;
+}
+
+.morphing .hi    {
+    view-transition-name: hi;
 }

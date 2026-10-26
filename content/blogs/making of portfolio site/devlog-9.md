@@ -12,4 +12,10 @@ So what i have in mind is a kinda unique mixture of kinda Bento styled design(li
 ![alt text](/images/image27.png)
 
 # Progress:
-1) 
+1) Made the 5 sec section:
+Although what to write is still kinda unsure so for now just the layout is done.
+![alt text](/images/image28.png)\
+
+2) Made the 1 min section:
+![alt text](/images/image29.png)
+Here's the 1 minute section and I also added cool morph animation with blur while transition :D
