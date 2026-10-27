@@ -169,8 +169,9 @@ a {
     display: none;
 }
 
-::view-transition-image-pair(*) {
-    animation: motion-blur 0.8s ease;
+.l1 .at-l3,
+.l2 .at-l3 {
+    display: none;
 }
 
 ::view-transition-new(*):only-child {
@@ -239,4 +240,32 @@ a {
 
 .morphing .hi    {
     view-transition-name: hi;
+}
+
+.morphing .big {
+    view-transition-name: big;
+}
+
+.morphing .side-1 {
+    view-transition-name: side-1;
+}
+
+.morphing .side-2 {
+    view-transition-name: side-2;
+}
+
+.at-l3 {
+    min-height: 200px;
+}
+
+.big {
+    grid-row: span 2;
+}
+
+::view-transition-new(side-1):only-child {
+    animation-delay: 0.08s;
+}
+
+::view-transition-new(side-2):only-child {
+    animation-delay: 0.16s;
 }
