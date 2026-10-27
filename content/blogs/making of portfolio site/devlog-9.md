@@ -19,3 +19,7 @@ Although what to write is still kinda unsure so for now just the layout is done.
 2) Made the 1 min section:
 ![alt text](/images/image29.png)
 Here's the 1 minute section and I also added cool morph animation with blur while transition :D
+
+3) made the 5 min section:
+![alt text](/images/image30.png)
+For now its kinda empty and in mean time, I will be thinking of what content to put there :D
