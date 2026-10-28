@@ -13,9 +13,14 @@ Since, on the actual project, i had size limit of 3kb but here, we don't really 
 
 *dino is going to hug his friend cactus :D*
 
-2) small qol: fixed the underline under the icon in `blog page` while hovering
-this:
+2) small qol: fixed the underline under the icon in `blog page` while hovering <br>
+from this:
 ![alt text](/images/image33.png)
 to this:
 ![alt text](/images/image34.png)
 and added this feature also in `about me` page also in `gallery` page.
+
+3) Made the pause screen which is at the begining before any input and when pressed esc.
+![alt text](/images/image35.png)
+
+4) 

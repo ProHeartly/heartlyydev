@@ -47,6 +47,10 @@ const palettes = {
 
 let flip = 0; // 0 = site theme, 1 = opposite theme (chaos mode)
 
+let paused = false; // true when pause screen is up
+let started = false; // false until the first space or click
+let pauseShown = false; // so the pause screen is only drawn once
+
 // blends two hex colors, k = 0 give a and k = 1 gibes b
 function blend(a, b, k) {
     const x = parseInt(a.slice(1), 16);
@@ -79,6 +83,24 @@ let dino = {
     j: 17, // jump strength -turns out 16 was a little less
     ig: false // isGrounded -to make it only jump when in floorrr
 }, obstacles = [], gameSpeed = 10, spawnTimer = 0, nextSpawnTime = 100, gameOver = false, score = 0, t = 0, te = 0, tg=rg(), cd = 0;
+
+function showPause() {
+    const col = colors();
+    ctx.globalAlpha = 0.75;
+    ctx.fillStyle = col.sky;
+    ctx.fillRect(0, 0, c.width, c.height);
+    ctx.globalAlpha = 1;
+
+    ctx.fillStyle = col.text;
+    ctx.textAlign = 'center';
+    ctx.font = 'bold 40px monospace';
+
+    ctx.fillText(started ? "PAUSED": "READY?", 427, 215);
+    ctx.font = '18px monospace';
+    ctx.fillText(`press SPACE or CLICK to ${started ? 'resume': 'start'}`, 427, 255);
+    ctx.fillText('(ESC pauses anytime)', 427, 285)
+    pauseShown = true;
+}
 
 function rg() {return 200 + ~~(Math.random()*300);} // bascially generates 200 to 500 ranged value
 
@@ -128,6 +150,14 @@ function triggerJump() {
         resetGame();
         return;
     }
+
+    if (paused) {
+        paused = false;
+        started = true;
+        pauseShown = false;
+        return;
+    }
+
     if (dino.ig || !cd) {
         dino.v = -dino.j; // (-)ve cuz velocityY's direction is down ;)
         dino.ig || (cd = 300);
@@ -135,6 +165,11 @@ function triggerJump() {
 }
 
 function update() { //actively updates pos
+    if (paused) {
+        if (!pauseShown) showPause();
+        requestAnimationFrame(update); 
+        return;        
+    }
     flip += ((te ? 1:0) - flip) * 0.04;
 
     const col = colors();
@@ -212,11 +247,22 @@ function update() { //actively updates pos
         dinoB.concat(dino.ig ? [legsA, legsB][~~score % 2] : legsJ),
         16, dino.x, dino.y, col.dino
     );
-    
+    if (!started) paused = true;
+
     requestAnimationFrame(update);
 }
 
 c.onpointerdown = triggerJump;
-window.onkeydown = e => e.key === ' ' && (e.preventDefault(), triggerJump());
+window.onkeydown = e => {
+    if (e.key === ' ') {
+        e.preventDefault();
+        triggerJump();
+    }
+    if (e.key === "Escape" && started && !gameOver) paused = true;
+};
+
+document.onvisibilitychange = () => {
+    if (document.hidden && started && !gameOver) paused = true;
+} // paused when change tab
 
 update();
