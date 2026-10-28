@@ -152,6 +152,14 @@ body {
     width: calc(60vw - 32px);
 }
 
+.card.i {
+    width: calc(60vw - 32px);
+}
+
+.card.j {
+    width: calc(60vw - 32px);
+}
+
 .card.a {
     position: relative;
     overflow: hidden;

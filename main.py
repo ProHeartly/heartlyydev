@@ -197,6 +197,10 @@ def blog_post(request: Request, board: str, post: str):
         }
     )
 
+@app.get("/dino")
+def dino(request: Request):
+    return src.TemplateResponse(request=request, name="dino.html")
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)

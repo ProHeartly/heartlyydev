@@ -1,0 +1,222 @@
+// turns out its way over 3,072 bytes, so i will have to cut everything uppppp
+// started with sprites which ate up most of the spaces!
+// replaced old line making strat with just making rectangle which is 1 liner
+// using precalculated values for things that are constant like x, y, width, height, etc of vari, dino's y pos, position of text, other
+// changed DOM properties to shorterrrr
+// made triggerz shortterrr
+// since spawner function was just overkill, removed it and made it inside update itself!
+// I changed names to short for extra space
+document.querySelector("h1").onclick = () => (alert("woaa!"));
+
+const c = document.getElementById("c");
+const ctx = c.getContext('2d');
+
+const dinoB = [1008,2040,1784,2040,2016,2044,8176,16382,65520,65520,65472,16320]; // bodyy
+const legsJ = [3968,3456,2304,3456];  // jump/idle
+const legsA = [3968,3200,2240,3072];  // run 1
+const legsB = [3968,2432,6272,192];   // run 2
+
+const Single = [126, 60, 153, 219, 255, 255, 126, 60, 60, 60, 60, 60];
+const Double = [114736, 114736, 246259, 258559, 258559, 127228, 114736, 114736, 114736, 114736, 114736, 114736];
+const Tall = [252, 252, 252, 252, 888, 827, 955, 1023, 1023, 255, 120, 120, 120, 120, 120, 120, 120, 120];
+
+const vari = [
+    { s: Single, cols: 8, w: 56, h: 84, y: 346 },
+    { s: Double, cols: 18, w: 126, h: 84, y: 346 },
+    { s: Tall, cols: 10, w: 70, h: 126, y: 304 }
+];
+
+const Cloud = [1792,4044,32766,65535,16380];
+const Pyr = [384,960,2016,4080,8184,16380,32766,65535];
+const Peb1 = [1835392,12296];
+const Peb2 = [16440,3074];
+const Peb3 = [3088];
+
+const palettes = {
+    dark: {
+        sky: "#0d0540", text: "#a1b1ff", dim: "#4b5296", ground: "#a1b1ff",
+        dino: "#a1b1ff", cactus: "#4fc98e", pyramid: "#1c2378",
+        cloudFar: "#221a78", cloudNear: "#2e2492", pebble: "#3a3f8f"
+    },
+    light: {
+        sky: "#f4f5fc", text: "#004EB9", dim: "#9aa6e0", ground: "#004EB9",
+        dino: "#004EB9", cactus: "#2f7d4f", pyramid: "#cfd3ff",
+        cloudFar: "#e6e9ff", cloudNear: "#d6dbff", pebble: "#7f8fd6"
+    }
+};
+
+let flip = 0; // 0 = site theme, 1 = opposite theme (chaos mode)
+
+// blends two hex colors, k = 0 give a and k = 1 gibes b
+function blend(a, b, k) {
+    const x = parseInt(a.slice(1), 16);
+    const y = parseInt(b.slice(1), 16);
+    const ch = s => Math.round(((x >> s) & 255) * (1 - k) + ((y >> s) & 255) * k);
+    return `rgb(${ch(16)}, ${ch(8)}, ${ch(0)})`;
+}
+
+function colors() {
+    const theme = document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+    const now = palettes[theme];
+    const other = palettes[theme === "light" ? "dark": "light"];
+    const out = {};
+
+    for (const key in now) out[key] = blend(now[key], other[key], flip);
+    return out;
+}
+
+const pixel = 7; // scales our pixel art
+
+const groundY = 430; //we define where the ground is, like in our case, its 854x480 (480p quality) and here we can see height is 480 so considering some margin, we can take 430 as safe spot for floor
+
+let dino = {
+    x: 300,
+    y: 318, // 430 - 112
+    w: 112, // 16 * pixel (7)
+    h: 112,
+    v: 0, // only velocity of y
+    g: 0.8, // gravity
+    j: 17, // jump strength -turns out 16 was a little less
+    ig: false // isGrounded -to make it only jump when in floorrr
+}, obstacles = [], gameSpeed = 10, spawnTimer = 0, nextSpawnTime = 100, gameOver = false, score = 0, t = 0, te = 0, tg=rg(), cd = 0;
+
+function rg() {return 200 + ~~(Math.random()*300);} // bascially generates 200 to 500 ranged value
+
+function drawSprite(s, w, x, y, color, p=pixel) { //draws the dinooo and obstacles
+    ctx.fillStyle = color;
+    s.forEach((n, r) => {
+    for (let c = 0; c < w; c++) {
+        if ((n >> (w - 1 - c)) & 1) {
+            ctx.fillRect(x + c * p, y + r * p, p, p);
+        }
+    }
+});
+}
+
+function layer(s, w, y, p, sp, g, col) {
+    const W = w * p + g;
+    for (let x = -(t * sp % W); x < 854; x += W) drawSprite(s, w, x, y, col, p);
+}
+
+// checks AABB collision
+function checkCol(r1, r2) {
+    const m = 20;
+    return (
+        r1.x + m < r2.x + r2.w &&
+        r1.x + r1.w - m > r2.x &&
+        r1.y + m < r2.y + r2.h &&
+        r1.y + r1.h - m > r2.y
+)
+}
+
+function resetGame() {
+    obstacles = [];
+    spawnTimer = 0;
+    gameOver = false;
+    dino.y = 318;
+    dino.v = 0;
+    score = 0;
+    te = 0;
+    tg = rg();
+    cd = 0;
+    flip = 0;
+    update();
+}
+
+function triggerJump() {
+    if (gameOver) {
+        resetGame();
+        return;
+    }
+    if (dino.ig || !cd) {
+        dino.v = -dino.j; // (-)ve cuz velocityY's direction is down ;)
+        dino.ig || (cd = 300);
+    }
+}
+
+function update() { //actively updates pos
+    flip += ((te ? 1:0) - flip) * 0.04;
+
+    const col = colors();
+    
+    ctx.fillStyle = col.sky;
+    ctx.fillRect(0, 0, c.width, c.height);
+    ctx.fillStyle = col.text;
+
+    ctx.font = '20px monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText(`${~~score} \\ ${ (te ? 'CHAOSSSS' : tg ) }`, 840, 30);
+    ctx.font = '14px monospace';
+    ctx.fillStyle = cd ? col.dim : col.text;
+    ctx.fillText('air jump - ' + (cd ? ~~(cd / 60) + 1 + 's' : 'available'), 840, 50);
+    t+= gameSpeed;
+    layer(Pyr, 16, 318, 14, 0.1, 400, col.pyramid); // pyramidss
+    layer(Cloud, 16, 50, 5, 0.2, 300, col.cloudFar); // one far
+    layer(Cloud, 16, 140, 5, 0.35, 500, col.cloudNear); // one close
+    layer(Peb1, 24, 438, 4, 1, 40, col.pebble);
+    layer(Peb2, 16, 452, 4, 1, 90, col.pebble);
+    layer(Peb3, 12, 466, 4, 1, 170, col.dim);
+
+    score+= 0.15;
+    cd && cd--;
+    if (!te && score >= tg) te = score + 150;
+    if (te && score >= te) te = 0, tg = ~~score + rg();
+    // lets make gameSpeed change shall we??
+    gameSpeed = 10 + Math.min(4, score / 150) + (te && 2);
+    dino.v += dino.g;
+    dino.y += dino.v;
+
+    dino.ig = dino.y >= 318;
+    if (dino.ig) {
+        dino.y = 318;
+        dino.v = 0;
+    }
+
+    // spawner
+    spawnTimer++;
+    if (spawnTimer >= nextSpawnTime) {
+        const ch = vari[~~(Math.random() * 3)];
+        obstacles.push({ x: 854, y: ch.y, w: ch.w, h: ch.h, s: ch.s, cols: ch.cols });
+        spawnTimer = 0;
+        nextSpawnTime = (~~(Math.random() * 60) + 60) * (te ? .7 : 1);
+    }
+
+    // move andd draw obstacles
+    for (let i = obstacles.length - 1; i >= 0; i--) {
+        obstacles[i].x -= gameSpeed;
+
+        drawSprite(obstacles[i].s, obstacles[i].cols, obstacles[i].x, obstacles[i].y, col.cactus); //this new green little better
+
+        if (checkCol(dino, obstacles[i])) {
+            gameOver = true;
+            
+            ctx.fillStyle = col.sky;
+            ctx.fillRect(0, 0, c.width, c.height);
+
+            ctx.fillStyle = col.text;
+            ctx.font = 'bold 36px monospace';
+            ctx.textAlign = 'center';
+            ctx.fillText('GAME OVER!', 427, 200);
+            ctx.fillText(`Score: ${~~score}`, 427, 240);
+            ctx.fillText('Press SPACE or CLICK to Restart', 427, 280);
+            return;
+        }
+        if (obstacles[i].x + obstacles[i].w < 0) obstacles.splice(i, 1);
+    }
+    
+
+    ctx.fillStyle = col.ground;
+    ctx.fillRect(0, groundY, c.width, 3); // why didn't i think of this earlierr, we can just make it rectangle and save space
+
+    drawSprite(
+        dinoB.concat(dino.ig ? [legsA, legsB][~~score % 2] : legsJ),
+        16, dino.x, dino.y, col.dino
+    );
+    
+    requestAnimationFrame(update);
+}
+
+c.onpointerdown = triggerJump;
+window.onkeydown = e => e.key === ' ' && (e.preventDefault(), triggerJump());
+
+update();
