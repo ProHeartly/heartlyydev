@@ -39,3 +39,6 @@ Although, now it works but, I had few qol ideas: like in offline, the ph icons d
 ![alt text](/images/image37.png)
 
 Turns out `navigator.onLine` is not very reliable but we can use `generate_204` from google to check the same thing, from `https://www.google.com/generate_204`
+
+YAH! now it works!
+![alt text](/images/image38.png)
