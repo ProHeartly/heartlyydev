@@ -31,3 +31,6 @@ and added this feature also in `about me` page also in `gallery` page.
 YAHHH kinda unique thingyy.. since we alr have the dino game, let's make the browser save a cache of dino game on their first visit, then when they visit offline, the game will load instead of errors :D. This can be done using service worker.
 
 I will put a small code inside `theme.js`, **WHY THEME.JS??**: cuz it's in almost all site (from what i can remember), so it perfectly fits the requirement to initilize the service worker download. I used [this](https://web.dev/articles/offline-fallback-page?hl=en) as a source of info and other sources like yt too :D
+
+Although, now it works but, I had few qol ideas: like in offline, the ph icons doesn't load, so maybe i have to create alternative text for them and also, there is no indication for the user that he is offline, this might lead to misunderstandings. So we have to fix this stuff!
+

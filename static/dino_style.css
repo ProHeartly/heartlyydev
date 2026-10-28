@@ -60,7 +60,8 @@ a {
     border: none;
     color: var(--text-color);
     font-size: 2rem;
-    display: inline-flex;    
+    display: inline-flex;
+    cursor: pointer;
 }
 
 h1 {
@@ -82,6 +83,38 @@ canvas {
     display: block;
     max-width: 100%;
     height: auto;
-    border-radius: 8;
+    border-radius: 8px;
     touch-action: manipulation;
+}
+
+.status {
+    display: none;
+    width: fit-content;
+    max-width: calc(100% - 32px);
+
+    margin: 0 auto 24px;
+    padding: 10px 20px;
+
+    border-radius: 999px;
+    background: var(--card-bg);
+}
+
+.status a {
+    text-decoration: underline;
+}
+
+.fallback .status {
+    display: block;
+}
+
+.fallback .back {
+    visibility: hidden;
+}
+
+.offline .ph-moon::before {
+    content: "dark mode";
+}
+
+.offline .ph-sun::before {
+    content: "light mode";
 }

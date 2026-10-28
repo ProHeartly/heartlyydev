@@ -1,3 +1,24 @@
+// sw.js thingy
+const status = document.querySelector(".status");
+if (location.pathname !== "/dino" || !navigator.onLine) {
+    document.body.classList.add("fallback");
+    status.textContent = navigator.onLine
+        ? "my server is taking a nap, so here's a game while you wait!"
+        : "you're offline, so here's a game while you wait!"
+}
+
+if (!navigator.onLine) document.body.classList.add("offline");
+
+window.addEventListener("offline", () => document.body.classList.add("offline"));
+window.addEventListener("online", () => {
+    document.body.classList.remove("offline");
+    if (document.body.classList.contains("fallback")) {
+        status.innerHTML = 'you\'re back online! <a href=""> reload this page</a>';
+    }
+});
+
+
+
 // turns out its way over 3,072 bytes, so i will have to cut everything uppppp
 // started with sprites which ate up most of the spaces!
 // replaced old line making strat with just making rectangle which is 1 liner
