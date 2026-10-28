@@ -47,6 +47,10 @@ body {
     text-decoration: none;
 }
 
+.back:hover b {
+    text-decoration: underline;
+}
+
 .title {
     display: grid;
     justify-content: center;

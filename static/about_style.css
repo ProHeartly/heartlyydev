@@ -59,6 +59,10 @@ a {
     text-decoration: none;
 }
 
+.back:hover span {
+    text-decoration: underline;
+}
+
 .picker {
     text-align: center;
 }

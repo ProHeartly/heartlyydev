@@ -44,7 +44,7 @@
     gap: 6px;
 }
 
-.mast-link:hover {
+.mast-link:hover span {
     text-decoration: underline;
 }
 

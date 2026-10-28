@@ -12,3 +12,10 @@ Since, on the actual project, i had size limit of 3kb but here, we don't really 
 ![alt text](/images/image32.png)
 
 *dino is going to hug his friend cactus :D*
+
+2) small qol: fixed the underline under the icon in `blog page` while hovering
+this:
+![alt text](/images/image33.png)
+to this:
+![alt text](/images/image34.png)
+and added this feature also in `about me` page also in `gallery` page.
