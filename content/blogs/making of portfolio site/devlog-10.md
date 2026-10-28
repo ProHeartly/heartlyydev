@@ -26,3 +26,8 @@ and added this feature also in `about me` page also in `gallery` page.
 4) Made the game's theme change in sync with site: before, the change in theme in game used to occur only after the next update, and in case of paused screen, only after unpause but now it happens in the real time by using
 `observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });`, this looks for change in the `data-theme` and changes the theme of game real-time in sync.
 ![alt text](/images/image36.png)
+
+5) Offline dino:
+YAHHH kinda unique thingyy.. since we alr have the dino game, let's make the browser save a cache of dino game on their first visit, then when they visit offline, the game will load instead of errors :D. This can be done using service worker.
+
+I will put a small code inside `theme.js`, **WHY THEME.JS??**: cuz it's in almost all site (from what i can remember), so it perfectly fits the requirement to initilize the service worker download. I used [this](https://web.dev/articles/offline-fallback-page?hl=en) as a source of info and other sources like yt too :D

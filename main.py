@@ -7,7 +7,7 @@ from pathlib import Path
 from fastapi import FastAPI, Request, UploadFile, File, Form, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, FileResponse
 import json
 from starlette.middleware.sessions import SessionMiddleware
 
@@ -200,6 +200,10 @@ def blog_post(request: Request, board: str, post: str):
 @app.get("/dino")
 def dino(request: Request):
     return src.TemplateResponse(request=request, name="dino.html")
+
+@app.get("/sw.js")
+def service_worker():
+    return FileResponse("static/sw.js", media_type="application/javascript")
 
 if __name__ == "__main__":
     import uvicorn
