@@ -34,3 +34,8 @@ I will put a small code inside `theme.js`, **WHY THEME.JS??**: cuz it's in almos
 
 Although, now it works but, I had few qol ideas: like in offline, the ph icons doesn't load, so maybe i have to create alternative text for them and also, there is no indication for the user that he is offline, this might lead to misunderstandings. So we have to fix this stuff!
 
+*ANOTEHR PROBLEM*: So I deployed it into nest to test out in actual not just local and when i tried offline thingy, it always said server issue even when it was just no internet SO i have to change how no internet is detected!
+
+![alt text](/images/image37.png)
+
+Turns out `navigator.onLine` is not very reliable but we can use `generate_204` from google to check the same thing, from `https://www.google.com/generate_204`

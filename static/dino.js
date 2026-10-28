@@ -1,10 +1,17 @@
 // sw.js thingy
 const status = document.querySelector(".status");
-if (location.pathname !== "/dino" || !navigator.onLine) {
+if (location.pathname !== "/dino") {
     document.body.classList.add("fallback");
-    status.textContent = navigator.onLine
-        ? "my server is taking a nap, so here's a game while you wait!"
-        : "you're offline, so here's a game while you wait!"
+    status.textContent = "checking connection...";
+
+    fetch("https://www.google.com/generate_204", {mode:"no-cors", cache:"no-store"})
+        .then(() => {
+            status.textContent = "my server is taking a nap, so here's a game while you wait!";
+        })
+        .catch(() => {
+            status.textContent = "you're offine, so here's a game while you wait!";
+            document.body.classList.add("offline");
+        });
 }
 
 if (!navigator.onLine) document.body.classList.add("offline");
