@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     container.addEventListener("wheel", (e) => {
+        if (window.innerWidth <= 700) return;
         e.preventDefault();
 
         if (!isAnimating) {

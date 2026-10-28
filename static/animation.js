@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 entry.target.classList.remove("in-view");
             }
         });
-    }, {root: container, threshold: 0.15});
+    }, {root: window.innerWidth > 700? container : null, threshold: 0.15});
 
     cards.forEach(card => observer.observe(card));
 });

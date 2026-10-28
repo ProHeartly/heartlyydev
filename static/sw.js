@@ -1,6 +1,6 @@
 // THIS IS SERVICE WORKER: aka this keeps the dino game saved in brower to be playable even when offline.
 // source: https://web.dev/articles/offline-fallback-page?hl=en
-const CACHE = "dino-v3"; // I need to change this if i update dino.html or theme.js
+const CACHE = "dino-v4"; // I need to change this if i update dino.html or theme.js
 const FILES = ["/dino", "/static/theme.js", "/static/dino_style.css", "/static/dino.js"];
 
 // first visit: save the game in da browser

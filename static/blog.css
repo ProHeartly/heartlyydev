@@ -349,3 +349,9 @@
 .paper-foot a:hover {
     text-decoration: underline;
 }
+
+@media (max-width: 600px) {
+    .mast-date {
+        display: none;
+    }
+}

@@ -275,3 +275,87 @@ body {
         transform: rotate(360deg);
     }
 }
+
+@media (max-width: 700px) {
+    html,
+    body {
+        height: 100%;
+        overflow: hidden;
+        overscroll-behavior: none;
+    }
+
+    .main {
+        height: 100dvh;
+        padding: 12px;
+        gap: 12px;
+
+        scroll-snap-type: x proximity;
+        scroll-padding-left: 12px;
+        touch-action: pan-x;
+    }
+
+    .row {
+        height: calc(50dvh - 18px);
+        gap: 12px;
+    }
+
+    .row:first-child .card {
+        scroll-snap-align: start;
+    }
+
+    .card.a,
+    .card.d,
+    .card.e,
+    .card.h {
+        width: 85vw;
+    }
+
+    .card.b,
+    .card.g,
+    .card.i,
+    .card.j {
+        width: 70vw;
+    }
+
+    .card.c,
+    .card.f {
+        width: 45vw;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .card h1 {
+        font-size: 2.6rem;
+    }
+
+    .card p {
+        font-size: 1rem;
+    }
+
+    .card i {
+        font-size: 3.5rem;
+    }
+
+    .card:hover h1 {
+        text-decoration-thickness: 0.25rem;
+        text-underline-offset: 0.4rem;
+    }
+
+    .card.a .track-front,
+    .card.a .track-back {
+        font-size: 1.8rem;
+        width: 90%;
+    }
+
+    .card.a .record-wrapper {
+        width: 160px;
+        height: 160px;
+    }
+
+    .card.a .listen-btn,
+    .card.a .listen-btn i {
+        font-size: 1.1rem;
+    }
+}

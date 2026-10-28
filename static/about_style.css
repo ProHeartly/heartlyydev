@@ -273,3 +273,37 @@ a {
 ::view-transition-new(side-2):only-child {
     animation-delay: 0.16s;
 }
+
+@media (max-width: 700px) {
+    .top {
+        grid-template-columns: 1fr auto;
+        row-gap: 16px;
+        padding: 16px;
+    }
+
+    .picker {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+
+    .picker p {
+        font-size: 1.6rem;
+    }
+
+    .levels button {
+        padding: 8px 14px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        padding: 16px 16px 48px;
+    }
+
+    .photo {
+        height: 360px;
+    }
+
+    .big {
+        grid-row: auto;
+    }
+}
