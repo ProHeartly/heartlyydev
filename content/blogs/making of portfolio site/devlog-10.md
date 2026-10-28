@@ -23,4 +23,6 @@ and added this feature also in `about me` page also in `gallery` page.
 3) Made the pause screen which is at the begining before any input and when pressed esc.
 ![alt text](/images/image35.png)
 
-4) 
+4) Made the game's theme change in sync with site: before, the change in theme in game used to occur only after the next update, and in case of paused screen, only after unpause but now it happens in the real time by using
+`observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });`, this looks for change in the `data-theme` and changes the theme of game real-time in sync.
+![alt text](/images/image36.png)

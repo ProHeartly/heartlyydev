@@ -50,6 +50,7 @@ let flip = 0; // 0 = site theme, 1 = opposite theme (chaos mode)
 let paused = false; // true when pause screen is up
 let started = false; // false until the first space or click
 let pauseShown = false; // so the pause screen is only drawn once
+let repaint = false; // draw one frame in the new theme, then pause again
 
 // blends two hex colors, k = 0 give a and k = 1 gibes b
 function blend(a, b, k) {
@@ -100,6 +101,20 @@ function showPause() {
     ctx.fillText(`press SPACE or CLICK to ${started ? 'resume': 'start'}`, 427, 255);
     ctx.fillText('(ESC pauses anytime)', 427, 285)
     pauseShown = true;
+}
+
+function showGameOver() {
+    const col = colors();
+    ctx.fillStyle = col.sky;
+    ctx.fillRect(0, 0, c.width, c.height);
+
+    ctx.fillStyle = col.text;
+    ctx.font = 'bold 36px monospace';
+    ctx.textAlign = 'center';
+
+    ctx.fillText('GAME OVER!', 427, 200);
+    ctx.fillText(`Score: ${~~score}`, 427, 240);
+    ctx.fillText('Press SPACE or CLICK to Restart', 427, 280)
 }
 
 function rg() {return 200 + ~~(Math.random()*300);} // bascially generates 200 to 500 ranged value
@@ -225,15 +240,7 @@ function update() { //actively updates pos
         if (checkCol(dino, obstacles[i])) {
             gameOver = true;
             
-            ctx.fillStyle = col.sky;
-            ctx.fillRect(0, 0, c.width, c.height);
-
-            ctx.fillStyle = col.text;
-            ctx.font = 'bold 36px monospace';
-            ctx.textAlign = 'center';
-            ctx.fillText('GAME OVER!', 427, 200);
-            ctx.fillText(`Score: ${~~score}`, 427, 240);
-            ctx.fillText('Press SPACE or CLICK to Restart', 427, 280);
+            showGameOver();
             return;
         }
         if (obstacles[i].x + obstacles[i].w < 0) obstacles.splice(i, 1);
@@ -247,7 +254,10 @@ function update() { //actively updates pos
         dinoB.concat(dino.ig ? [legsA, legsB][~~score % 2] : legsJ),
         16, dino.x, dino.y, col.dino
     );
-    if (!started) paused = true;
+    if (!started || repaint) {
+        paused = true
+        repaint = false;
+    };
 
     requestAnimationFrame(update);
 }
@@ -266,3 +276,12 @@ document.onvisibilitychange = () => {
 } // paused when change tab
 
 update();
+
+new MutationObserver(() => {
+    if (gameOver) showGameOver();
+    else if (paused) {
+        paused = false;
+        pauseShown = false;
+        repaint = true;
+    }
+}).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
