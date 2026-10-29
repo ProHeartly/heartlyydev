@@ -9,6 +9,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse, FileResponse
 import json
+import urllib.request
+import urllib.parse
 from starlette.middleware.sessions import SessionMiddleware
 
 import smtplib
@@ -85,6 +87,13 @@ def get_posts(folder):
     posts = [read_post(f) for f in folder.glob("*.md")]
     posts.sort(key=lambda p: (p["date"], p["slug"]), reverse=True)
     return posts
+
+
+previews = {} # songs we alr looked up, so we only ask once per song
+
+def get_json(url):
+    with urllib.request.urlopen(url, timeout=8) as res:
+        return json.loads(res.read())
 
 @app.get("/")
 def index(request: Request):
@@ -204,6 +213,28 @@ def dino(request: Request):
 @app.get("/sw.js")
 def service_worker():
     return FileResponse("static/sw.js", media_type="application/javascript")
+
+@app.get("/api/preview")
+def preview(song: str, artist: str = ""):
+    key = f"{song} {artist}".lower()
+    if key in previews and time.time() - previews[key]["time"] < 600:
+        return previews[key]
+
+    result = {"preview": None, "links": {}, "time": time.time()}
+
+    found = get_json("https://api.deezer.com/search?limit=1&q=" + urllib.parse.quote(key))["data"]
+    if found:
+        result["preview"] = found[0]["preview"]
+
+        q = urllib.parse.quote(f"{song} {artist}")
+        result["links"] = {
+            "spotify": f"https://open.spotify.com/search/{q}",
+            "youtube": f"https://www.youtube.com/results?search_query={q}",
+            "appleMusic": f"https://music.apple.com/search?term={q}",
+        }
+
+    previews[key] = result
+    return result
 
 if __name__ == "__main__":
     import uvicorn

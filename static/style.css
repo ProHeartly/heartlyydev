@@ -276,6 +276,55 @@ body {
     }
 }
 
+.card.a .what {
+    margin-bottom: 18px;
+}
+
+.card.a .ring {
+    position: absolute;
+    inset: -14px;
+    transform: rotate(-90deg);
+}
+
+.card.a .ring circle {
+    fill: none;
+    stroke-width: 2;
+}
+
+.card.a .ring-track {
+    stroke: color-mix(in srgb, var(--text-color) 15%, transparent);
+}
+
+.card.a .ring-progress {
+    stroke: var(--text-color);
+    stroke-dasharray: 502.65;
+    stroke-dashoffset: 502.65;
+    transition: stroke-dashoffset 0.3s linear;
+}
+
+
+.card.a .full-song {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    z-index: 4;
+
+    font-family: "Space Grotesk", sans-serif;
+    color: var(--text-color);
+
+    opacity: 0;
+    transform: opacity 0.4s;
+}
+
+.card.a .full-song.show {
+    opacity: 1;
+}
+
+.card.a .full-song a {
+    color: inherit;
+    text-decoration: underline;
+}
+
 @media (max-width: 700px) {
     html,
     body {
@@ -357,5 +406,11 @@ body {
     .card.a .listen-btn,
     .card.a .listen-btn i {
         font-size: 1.1rem;
+    }
+
+    .card.a .full-song {
+        bottom: auto;
+        top: 16px;
+        font-size: 0.85rem;
     }
 }

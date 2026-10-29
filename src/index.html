@@ -13,20 +13,25 @@
 <body>
     <div class="main">
         <div class="row">
-            <a class="card a">
+            <div class="card a">
                 <p id="what" class="what hidden">I'm listening to</p>
                 <button id="listen-btn" class="listen-btn">
                     <i class="ph-duotone ph-play" id="listen-icon"></i>
-                    <span id="listen-text">Search this song</span>
+                    <span id="listen-text">Listen along</span>
                 </button>
                 <div class="track-back" id="track-back">Connecting to da thing</div>
                 <div class="record-wrapper" id="record-wrapper">
+                    <svg class="ring" viewBox="0 0 170 170">
+                        <circle class="ring-track" cx="85" cy="85" r="80"/>
+                        <circle class="ring-progress" id="ring-progress" cx="85" cy="85" r="80"/>
+                    </svg>
                     <div class="record" id="record">
                         <div class="label" id="label"></div>
                     </div>
                 </div>
                 <div class="track-front" id="track-front">Connecting to da thing</div>
-            </a>
+                <div class="full-song" id="full-song"></div>
+            </div>
              <a href="/dino" class="card i">
                 <h1>Dino game</h1>
                 <p>Try this cool little game!</p>
