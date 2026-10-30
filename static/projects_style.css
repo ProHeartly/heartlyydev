@@ -85,6 +85,9 @@ h1 {
     scrollbar-width: none;
 
     border-bottom: 12px solid var(--card-bg);
+
+    /* fade at the sides so it's clear that there are more books */
+    mask-image: linear-gradient(to right, transparent, black 100px, black calc(100% - 100px), transparent);
 }
 
 .book {
@@ -130,6 +133,8 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    box-shadow: inset 4px 0 6px rgba(255, 255, 255, 0.12), inset -6px 0 8px rgba(0, 0, 0, 0.2);
 }
 
 .side span {
