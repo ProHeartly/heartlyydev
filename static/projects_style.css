@@ -90,6 +90,10 @@ h1 {
     mask-image: linear-gradient(to right, transparent, black 100px, black calc(100% - 100px), transparent);
 }
 
+.self::-webkit-scrollbar {
+    display: none;
+}
+
 .book {
     --w: 56px;
     --h: 300px;
