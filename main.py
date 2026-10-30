@@ -236,6 +236,10 @@ def preview(song: str, artist: str = ""):
     previews[key] = result
     return result
 
+@app.get("/projects")
+def projects(request: Request):
+    return src.TemplateResponse(request=request, name="projects.html")
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)

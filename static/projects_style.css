@@ -1,0 +1,73 @@
+:root, [data-theme="dark"] {
+    --bg-color: #09002f;
+    --card-bg: #120b3d;
+    --text-color: #a1b1ff;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+[data-theme="light"] {
+    --bg-color: #f4f5fc;
+    --card-bg: #cfd3ff;
+    --text-color: #004EB9;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: "Space Grotesk", sans-serif;
+    min-height: 100vh;
+    text-align: center;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.top {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 24px 16px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.back:hover span {
+    text-decoration: underline;
+}
+
+.theme-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 2rem;
+    display: inline-flex;
+    cursor: pointer;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    
+    text-align: center;
+}
