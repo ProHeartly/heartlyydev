@@ -1,15 +1,15 @@
 const shelf = document.querySelector(".shelf");
-const books = document.querySelectorAll(".books");
+const books = document.querySelectorAll(".book");
 
-books.forEach(books => {
-    books.addEventListener("click", e => {
+books.forEach(book => {
+    book.addEventListener("click", e => {
         if (e.target.closest("a")) return; // so the demo n github button works as link
 
-        const wasOpen = books.classList.contains("open");
+        const wasOpen = book.classList.contains("open");
         books.forEach(b => b.classList.remove("open"));
 
         if (!wasOpen) {
-            books.classList.add("open");
+            book.classList.add("open");
             setTimeout(() => book.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" }), 350);
         }
     });
