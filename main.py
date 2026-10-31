@@ -13,6 +13,7 @@ import urllib.request
 import urllib.parse
 from starlette.middleware.sessions import SessionMiddleware
 import re
+import threading
 
 import smtplib
 from email.message import EmailMessage
@@ -99,7 +100,6 @@ def get_json(url):
 
 
 GITHUB = "ProHeartly"
-last_sync = 0
 
 def fill(project, repo):
     if not project.get("name"):
@@ -153,8 +153,10 @@ def sync_projects():
         else:
             projects.append(fill({}, repo))
 
-    projects_path.write_text(json.dumps(projects, indent=2, ensure_ascii=False), encoding="utf-8")
-
+    temp = projects_path.with_suffix(".tmp")
+    temp.write_text(json.dumps(projects, indent=2, ensure_ascii=False), encoding="utf-8")
+    temp.replace(projects_path)
+    
 
 @app.get("/")
 def index(request: Request):
@@ -299,20 +301,21 @@ def preview(song: str, artist: str = ""):
 
 @app.get("/projects")
 def projects(request: Request):
-    global last_sync
-
-    if time.time() - last_sync > 3600: # checks github at most once an hour, when someone visits
-        last_sync = time.time()
-        try:
-            sync_projects()
-        except Exception:
-            pass
-
     return src.TemplateResponse(
         request=request,
         name="projects.html",
         context= {"projects": json.loads(projects_path.read_text(encoding="utf-8"))}
     )
+
+def sync_loop():
+    while True:
+        try:
+            sync_projects()
+        except Exception:
+            pass
+        time.sleep(3600)
+
+threading.Thread(target=sync_loop, daemon=True).start()
 
 if __name__ == "__main__":
     import uvicorn
