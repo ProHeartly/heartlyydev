@@ -62,3 +62,16 @@ Some small things I made sure of:
 
 
 3) But still, its kinda hectic having to add stuff manually, So what I'm thinking is a system that checks my repos, looks for a specific tag `heartlyy`, if it finds the tagged project which is not in the projects.json, it auto adds it.
+
+**how it works:**
+* Github returns 100 of my repos with `api.github.com/users/ProHeartly/repos`. Every repo comes with **topics** aka little tag thingy, so I check if `heartlyy` is one of them.
+* If a tagged repo isn't in `projects.json` yet, it gets added at the end with info straight from github: name, description, demo link and picture(finds image in readme and takes the first image as project picture)
+
+**Stuff that went wrong (as always):**
+* My first version treated github as absolute and removed everything (cuz nothing was tagged yet), so I change a-little, repos which are not in `projects.json`, it added projects which are not already in `projects.json`.
+* I wrote `readme.md` in small letters and didn't get any picture for some projects, turns out.. github is case-sensitive and some repos use `Readme.md` and some use `README.md`. So we now check for all three cases: `readme.md`, `Readme.md` and `README.md`.
+* The page took forever to load because it waited for github (and check all readmes) every time someone opened it. So now sync runs in a **background thread**, now every hour, the sync happens once.
+* once i was in the page when the sync suddenly happened and everything started to glich-out so now, it is written to `projects.tmp` first then swaps it in all at once.
+* the descriptions were getting cut off on the book covers, especially on phones where the covers were narrow. So now, i made every book 120px taller than normal.
+
+![alt text](/images/image47.png)
