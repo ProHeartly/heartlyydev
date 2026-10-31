@@ -1,0 +1,16 @@
+[
+  {
+    "name": "dinos world",
+    "description": "It's a game INSPIRED✨, just INSPIRED✨ from Google's official offline game aka da T-Rex. Although it was INSPIRED✨ by it, it contains quite unique features too which makes this INSPIRED✨ game better dino game.",
+    "picture": "",
+    "demo": "",
+    "github": "https://github.com/ProHeartly/dino"
+  },
+  {
+    "name": "heartlyy dev",
+    "description": "My personal site which is self-hosted, build with fastapi, and with ALOT of care!",
+    "picture": "/images/image42.png",
+    "demo": "https://heartlyy.dev",
+    "github": "https://github.com/ProHeartly/heartlyydev"
+  }
+]

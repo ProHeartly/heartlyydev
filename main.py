@@ -49,6 +49,7 @@ src = Jinja2Templates(directory="src")
 
 gallery_path = Path("content/gallery")
 caption_path = Path("content/caption.json")
+projects_path = Path("content/projects.json")
 
 blogs_dir = Path("content/blogs")
 
@@ -238,7 +239,11 @@ def preview(song: str, artist: str = ""):
 
 @app.get("/projects")
 def projects(request: Request):
-    return src.TemplateResponse(request=request, name="projects.html")
+    return src.TemplateResponse(
+        request=request,
+        name="projects.html",
+        context= {"projects": json.loads(projects_path.read_text(encoding="utf-8"))}
+    )
 
 if __name__ == "__main__":
     import uvicorn

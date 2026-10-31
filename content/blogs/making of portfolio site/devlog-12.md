@@ -34,3 +34,27 @@ Bugs I ran into (there were a few...)
 * Clicking did nothing because I wrote `.books` instead of `.book`, and then used `books` for both the list AND each single book
 * `scrollbar-width: 0` doesn't exist, it's `none` (and Safari needs `::-webkit-scrollbar { display: none }` too).
 ![alt text](/images/image45.png)
+
+2) Working with `projects.json`: Instead of writing every book by hand in the HTML, the shelf now builds itself from a `projects.json` file, same idea as how my gallery (`caption.json`) and blogs (markdown folders) work.
+
+Each project is just a little block in the json:
+```json
+{
+    "name": "heartlyy dev",
+    "description": "My personal site which is self-hosted, build with fastapi, and with ALOT of care!",
+    "picture": "/images/image42.png",
+    "demo": "https://heartlyy.dev",
+    "github": "https://github.com/ProHeartly/heartlyydev"
+}
+```
+
+The `/projects` route in `main.py` reads this filee and hands it to the template, and in `projects.html` a `{% for p in projects %}` loop makes one book for each project. So the HTML went from 12 copyy pasted books to just ONE book that repeatsz
+
+Some small things I made sure of:
+- `picture` and `demo` are optional. If they're empty (`""`), the book just has no picture or no Demo button instead of a broken one.
+- The order in the json = the order on the shelf, so I can rearrange my books by moving the blocks around.
+- The file is read every time someone opens the page, so after editing it I just refresh, no restarting the server.
+- I added a `.cover img` rule, because without it a big picture would spill out of the cover.
+
+
+![alt text](/images/image46.png)
