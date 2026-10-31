@@ -12,6 +12,7 @@ import json
 import urllib.request
 import urllib.parse
 from starlette.middleware.sessions import SessionMiddleware
+import re
 
 import smtplib
 from email.message import EmailMessage
@@ -95,6 +96,65 @@ previews = {} # songs we alr looked up, so we only ask once per song
 def get_json(url):
     with urllib.request.urlopen(url, timeout=8) as res:
         return json.loads(res.read())
+
+
+GITHUB = "ProHeartly"
+last_sync = 0
+
+def fill(project, repo):
+    if not project.get("name"):
+        project["name"] = repo["name"].replace("-", " ")
+    if not project.get("description"):
+        project["description"] = repo["description"] or ""
+    if not project.get("picture"):
+        project["picture"] = readme_pic(repo["name"], repo["default_branch"])
+    if not project.get("demo"):
+        project["demo"] = repo["homepage"] or ""
+    if not project.get("github"):
+        project["github"] = repo["html_url"]
+    return project
+
+# grabs the first pic from a repo's README (if it has)
+def readme_pic(repo, branch):
+    readme = ""
+    for file in ["README.md", "readme.md", "Readme.md"]:
+        try:
+            readme = urllib.request.urlopen(f"https://raw.githubusercontent.com/{GITHUB}/{repo}/{branch}/{file}", timeout=8).read().decode()
+            break
+        except Exception:
+            pass
+
+    found = re.search(r'!\[.*?\]\((\S+?)\)|<img[^>]+src="(.+?)"', readme) # works for ![alt](pic.png) and <img src="pic.png">
+    if not found:
+        return "" # no pic
+
+    pic = found.group(1) or found.group(2)
+
+    # pic is inside the repo, so make it a full link
+    if not pic.startswith("http"):
+        pic = f"https://raw.githubusercontent.com/{GITHUB}/{repo}/{branch}/{pic.removeprefix('./')}"
+
+    return pic
+
+# finds my repos with the `heartlyy` tag and puts them in projects.json
+# stuff i wrote myself in json stays, only empty things get filledd
+def sync_projects():
+    repos = get_json(f"https://api.github.com/users/{GITHUB}/repos?per_page=100")
+    projects = json.loads(projects_path.read_text(encoding="utf-8"))
+
+    saved = [p.get("github", "").rstrip("/").split("/")[-1] for p in projects]
+
+    for repo in repos:
+        if "heartlyy" not in repo["topics"]:
+            continue
+
+        if repo["name"] in saved:
+            fill(projects[saved.index(repo["name"])], repo)
+        else:
+            projects.append(fill({}, repo))
+
+    projects_path.write_text(json.dumps(projects, indent=2, ensure_ascii=False), encoding="utf-8")
+
 
 @app.get("/")
 def index(request: Request):
@@ -239,6 +299,15 @@ def preview(song: str, artist: str = ""):
 
 @app.get("/projects")
 def projects(request: Request):
+    global last_sync
+
+    if time.time() - last_sync > 3600: # checks github at most once an hour, when someone visits
+        last_sync = time.time()
+        try:
+            sync_projects()
+        except Exception:
+            pass
+
     return src.TemplateResponse(
         request=request,
         name="projects.html",

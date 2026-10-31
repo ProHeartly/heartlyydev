@@ -35,6 +35,7 @@ Bugs I ran into (there were a few...)
 * `scrollbar-width: 0` doesn't exist, it's `none` (and Safari needs `::-webkit-scrollbar { display: none }` too).
 ![alt text](/images/image45.png)
 
+
 2) Working with `projects.json`: Instead of writing every book by hand in the HTML, the shelf now builds itself from a `projects.json` file, same idea as how my gallery (`caption.json`) and blogs (markdown folders) work.
 
 Each project is just a little block in the json:
@@ -58,3 +59,6 @@ Some small things I made sure of:
 
 
 ![alt text](/images/image46.png)
+
+
+3) But still, its kinda hectic having to add stuff manually, So what I'm thinking is a system that checks my repos, looks for a specific tag `heartlyy`, if it finds the tagged project which is not in the projects.json, it auto adds it.

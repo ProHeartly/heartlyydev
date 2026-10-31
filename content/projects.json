@@ -12,5 +12,12 @@
     "picture": "/images/image42.png",
     "demo": "https://heartlyy.dev",
     "github": "https://github.com/ProHeartly/heartlyydev"
+  },
+  {
+    "name": "minetype",
+    "description": "Minetype is a monkey-type like typing game in the theme of minecraft, it uses vocab of minecraft toooo. It also has animated background, mineraft font and even ui \"inspired\" by minecraft.",
+    "picture": "https://raw.githubusercontent.com/ProHeartly/minetype/main/image.png",
+    "demo": "https://proheartly.github.io/minetype/",
+    "github": "https://github.com/ProHeartly/minetype"
   }
 ]
