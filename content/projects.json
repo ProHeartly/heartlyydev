@@ -2,7 +2,7 @@
   {
     "name": "dinos world",
     "description": "It's a game INSPIRED✨, just INSPIRED✨ from Google's official offline game aka da T-Rex. Although it was INSPIRED✨ by it, it contains quite unique features too which makes this INSPIRED✨ game better dino game.",
-    "picture": "",
+    "picture": "https://github.com/ProHeartly/dino/raw/main/image.png",
     "demo": "",
     "github": "https://github.com/ProHeartly/dino"
   },
@@ -19,5 +19,61 @@
     "picture": "https://raw.githubusercontent.com/ProHeartly/minetype/main/image.png",
     "demo": "https://proheartly.github.io/minetype/",
     "github": "https://github.com/ProHeartly/minetype"
+  },
+  {
+    "name": "alarm clock",
+    "description": "TNT CLOCK: A custom alarm clock which can be controlled via webserver which also has pomodoro functionalityyy!! in theme of minecraft tnt block.",
+    "picture": "https://raw.githubusercontent.com/ProHeartly/alarm-clock/main/images/asm2.png",
+    "demo": "",
+    "github": "https://github.com/ProHeartly/alarm-clock"
+  },
+  {
+    "name": "ATL discord bot",
+    "description": "A custom bot for Asia Tier List server for ranking of Basketball: Zero Asia players",
+    "picture": "",
+    "demo": "",
+    "github": "https://github.com/ProHeartly/ATL-discord-bot"
+  },
+  {
+    "name": "chessinal",
+    "description": "Chess in terminal :D",
+    "picture": "https://raw.githubusercontent.com/ProHeartly/chessinal/main/updates_ss/update_5.png",
+    "demo": "https://github.com/ProHeartly/chessinal/releases/tag/v0.1-alpha",
+    "github": "https://github.com/ProHeartly/chessinal"
+  },
+  {
+    "name": "my gallery",
+    "description": "A site filled with photos that seems random but each with caption explaining the context and the memory behind the picture!  \"Each photo has its own story to be told..!\" ",
+    "picture": "",
+    "demo": "https://proheartly.github.io/my-gallery/",
+    "github": "https://github.com/ProHeartly/my-gallery"
+  },
+  {
+    "name": "nightflash",
+    "description": "A fun little chromium extension which creates night time vibes with night fog. And your cursor acts as a flash. With some fireflies for the vibess. It also has pop up menu with which you can disable it, change torch size, torch/light temperature and edit the number of fireflies you want in the screen (don't go overboard, it might lag).",
+    "picture": "https://raw.githubusercontent.com/ProHeartly/nightflash/main/image.png",
+    "demo": "https://addons.mozilla.org/en-US/firefox/addon/night-flash/",
+    "github": "https://github.com/ProHeartly/nightflash"
+  },
+  {
+    "name": "now playing",
+    "description": "simply a site which shows a asthetic disc with the song's album when im playing a music in yt music :p also the background of the web changes with the music's album theme :D  and some cool loading animation as the disc rotates when changing song and also the background first changesinto opposite color then the actual color appears!",
+    "picture": "https://raw.githubusercontent.com/ProHeartly/now-playing/main/image.png",
+    "demo": "https://proheartly.github.io/now-playing/",
+    "github": "https://github.com/ProHeartly/now-playing"
+  },
+  {
+    "name": "potato quality",
+    "description": "A website — which is going to accept a image than it will convert that image into potato quality.. you get it right??? By potato quality I meant very low quality image using MATHS✨.  Yeaaa, you heard me righttt — I'm going to use magic of MATHS to convert your image into potato.. Solanum-Verto🧙🏻‍♂️🪄",
+    "picture": "",
+    "demo": "https://proheartly.github.io/potato-quality/",
+    "github": "https://github.com/ProHeartly/potato-quality"
+  },
+  {
+    "name": "terminal play",
+    "description": "A music player for your terminal. Build with python with textual library for those beautiful UI and pygame for playing the actual audio.",
+    "picture": "https://raw.githubusercontent.com/ProHeartly/terminal-play/main/screenshot/one.png",
+    "demo": "https://github.com/ProHeartly/terminal-play/releases/tag/v0.1.6-alpha",
+    "github": "https://github.com/ProHeartly/terminal-play"
   }
 ]
