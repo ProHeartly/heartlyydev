@@ -307,6 +307,10 @@ def projects(request: Request):
         context= {"projects": json.loads(projects_path.read_text(encoding="utf-8"))}
     )
 
+@app.get("/contact")
+def contact(request: Request):
+    return src.TemplateResponse(request=request, name="contact.html")
+
 def sync_loop():
     while True:
         try:
