@@ -7,7 +7,7 @@ from pathlib import Path
 from fastapi import FastAPI, Request, UploadFile, File, Form, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import RedirectResponse, FileResponse
+from fastapi.responses import RedirectResponse, FileResponse, JSONResponse
 import json
 import urllib.request
 import urllib.parse
@@ -39,6 +39,23 @@ def send_code(code):
         s.starttls()
         s.login("heartly@user.hackclub.app", MAIL_PASS)
         s.send_message(msg)
+
+sent = {}
+
+def send_mail(subject, body, reply_to=""):
+    mail = EmailMessage()
+    mail["Subject"] = subject
+    mail["From"] = "heartly@user.hackclub.app"
+    mail["To"] = ADMIN_MAIL
+    if "@" in reply_to:
+        mail["Reply-To"] = reply_to
+
+    mail.set_content(body)
+
+    with smtplib.SMTP("mx.user.hackclub.app", 587, timeout=20) as s:
+            s.starttls()
+            s.login("heartly@user.hackclub.app", MAIL_PASS)
+            s.send_message(mail)
 
 app = FastAPI()
 app.add_middleware(SessionMiddleware, secret_key=os.environ.get("SESSION_SECRET"), max_age=None)
@@ -310,6 +327,25 @@ def projects(request: Request):
 @app.get("/contact")
 def contact(request: Request):
     return src.TemplateResponse(request=request, name="contact.html")
+
+@app.post("/contact")
+def contact_send(request: Request, msg: str = Form(""), reply: str = Form(""), website: str = Form(""), seconds: float = Form(0)):
+    if website or seconds < 3:
+        return {"ok": True} # pretend that it worked :D
+
+    if not msg.strip():
+        return JSONResponse({"ok": False}, status_code=400)
+
+    # max 3 msg an hour per one person
+    ip = request.headers.get("x-forwarded-for", request.client.host).split(",")[0]
+    now = time.time()
+    sent[ip] = [t for t in sent.get(ip, []) if now - t < 3600]
+    if len(sent[ip]) >= 3:
+        return JSONResponse({"ok": False}, status_code=429)
+    sent[ip].append(now)
+
+    send_mail("new msg from heartlyy.dev", f"{msg[:2000]}\n\nreply to: {reply or 'not given'}", reply)
+    return {"ok": True}
 
 def sync_loop():
     while True:

@@ -66,7 +66,7 @@ function showCard() {
     const btn = card.querySelector(".act");
     btn.addEventListener("click", ()=> {
         if (c.link) window.open(c.link, "_blank");
-        if (c.message) return
+        if (c.message) openMessage(btn);
         if (c.copy) {
             navigator.clipboard.writeText(c.copy);
             btn.textContent = "copied mail";
@@ -131,7 +131,31 @@ dial.addEventListener("keydown", e => {
     if (e.key === "ArrowLeft") spinTo(Math.round(angle / step) * step + step);
 });
 
+function openMessage(btn) {
+    card.querySelector(".handle").remove();
+    btn.replaceWith(document.querySelector("#message-box").content.cloneNode(true));
 
+    const form = card.querySelector(".message");
+    form.querySelector("textarea").focus();
+
+    form.addEventListener("submit", async e => {
+        e.preventDefault();
+        const send = form.querySelector(".act");
+        send.disabled = true;
+        send.textContent = "sending..";
+
+        const data = new FormData(form);
+        data.append("seconds", (Date.now() - openedAt) / 1000);
+
+        const res = await fetch("/contact", { method: "POST", body: data });
+        if (res.ok) {
+            form.innerHTML = "<p>SENT! thanks for dropping by</p>"
+        } else {
+            send.disabled = false;
+            send.textContent = res.status === 429 ? "too many, try later" : "didn't send, try again";
+        }
+    });
+}
 
 draw();
 showCard();

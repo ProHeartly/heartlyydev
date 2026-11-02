@@ -29,6 +29,15 @@
         <div class="card"></div>
     </main>
 
+    <template id="message-box">
+        <form class="message">
+            <textarea name="msg" placeholder="say hi, or anything.." maxlength="2000" required></textarea>
+            <input type="text" name="reply" placeholder="where do you expect a reply? (your email, optional)" maxlength="200">
+            <input name="website" class="ho" tabindex="-1" autocomplete="off">
+            <button type="submit" class="act">send</button>
+        </form>
+    </template>
+
     <script src="/static/theme.js"></script>
     <script src="/static/contact.js"></script>
 </body>

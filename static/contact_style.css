@@ -239,6 +239,33 @@ h1 {
     }
 }
 
+.message {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.message textarea,
+.message input {
+    width: 100%;
+    border: 1.5px solid var(--text-color);
+    border-radius: 10px;
+    padding: 10px 12px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font: inherit;
+}
+
+.message textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.ho {
+    display: none;
+}
 
 @media (max-width: 700px) {
     .contact {
