@@ -355,7 +355,7 @@ def sync_loop():
             pass
         time.sleep(3600)
 
-threading.Thread(target=sync_loop, daemon=True).start()
+# threading.Thread(target=sync_loop, daemon=True).start()
 
 if __name__ == "__main__":
     import uvicorn

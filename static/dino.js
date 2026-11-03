@@ -111,7 +111,7 @@ let dino = {
     g: 0.8, // gravity
     j: 17, // jump strength -turns out 16 was a little less
     ig: false // isGrounded -to make it only jump when in floorrr
-}, obstacles = [], gameSpeed = 10, spawnTimer = 0, nextSpawnTime = 100, gameOver = false, score = 0, t = 0, te = 0, tg=rg(), cd = 0;
+}, obstacles = [], gameSpeed = 10, spawnTimer = 0, nextSpawnTime = 100, gameOver = false, score = 0, t = 0, te = 0, tg=rg(), cd = 0, last = 0;
 
 function showPause() {
     const col = colors();
@@ -207,13 +207,16 @@ function triggerJump() {
     }
 }
 
-function update() { //actively updates pos
+function update(now) { //actively updates pos
+    const dt = Math.min(3, (now - last) / 16.67 || 1);
+    last = now;
+
     if (paused) {
         if (!pauseShown) showPause();
         requestAnimationFrame(update); 
         return;        
     }
-    flip += ((te ? 1:0) - flip) * 0.04;
+    flip += ((te ? 1:0) - flip) * 0.04 * dt;
 
     const col = colors();
     
@@ -227,7 +230,7 @@ function update() { //actively updates pos
     ctx.font = '14px monospace';
     ctx.fillStyle = cd ? col.dim : col.text;
     ctx.fillText('air jump - ' + (cd ? ~~(cd / 60) + 1 + 's' : 'available'), 840, 50);
-    t+= gameSpeed;
+    t+= gameSpeed * dt;
     layer(Pyr, 16, 318, 14, 0.1, 400, col.pyramid); // pyramidss
     layer(Cloud, 16, 50, 5, 0.2, 300, col.cloudFar); // one far
     layer(Cloud, 16, 140, 5, 0.35, 500, col.cloudNear); // one close
@@ -236,13 +239,13 @@ function update() { //actively updates pos
     layer(Peb3, 12, 466, 4, 1, 170, col.dim);
 
     score+= 0.15;
-    cd && cd--;
+    cd = Math.max(0, cd - dt);
     if (!te && score >= tg) te = score + 150;
     if (te && score >= te) te = 0, tg = ~~score + rg();
     // lets make gameSpeed change shall we??
     gameSpeed = 10 + Math.min(4, score / 150) + (te && 2);
-    dino.v += dino.g;
-    dino.y += dino.v;
+    dino.v += dino.g * dt;
+    dino.y += dino.v * dt;
 
     dino.ig = dino.y >= 318;
     if (dino.ig) {
@@ -251,7 +254,7 @@ function update() { //actively updates pos
     }
 
     // spawner
-    spawnTimer++;
+    spawnTimer += dt;
     if (spawnTimer >= nextSpawnTime) {
         const ch = vari[~~(Math.random() * 3)];
         obstacles.push({ x: 854, y: ch.y, w: ch.w, h: ch.h, s: ch.s, cols: ch.cols });
@@ -261,7 +264,7 @@ function update() { //actively updates pos
 
     // move andd draw obstacles
     for (let i = obstacles.length - 1; i >= 0; i--) {
-        obstacles[i].x -= gameSpeed;
+        obstacles[i].x -= gameSpeed * dt;
 
         drawSprite(obstacles[i].s, obstacles[i].cols, obstacles[i].x, obstacles[i].y, col.cactus); //this new green little better
 
