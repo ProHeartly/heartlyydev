@@ -6,15 +6,6 @@ let panY = 0;
 let lastX = null;
 let lastY = null;
 
-const texts = ["Place holderrrr", "A VERYYY LONGGG PLACE holderrrrr blablablablablbnablablbalblablablablablbnablablbalblablablablablbnablablbalblablablablablbnablablbalblablablablablbnablablbalblablablablablbnablablbalblablablablablbnablablbalblablablablablbnablablbalblablablablablbnablablbalblablablablablbnablablbala", "test"];
-
-const notes = texts.map(text => ({
-    text,
-    name: "anonymous",
-    x: Math.random() * 1000 - 500,
-    y: Math.random() * 600 - 300
-}));
-
 const gap = 24;
 const placed = []
 
@@ -42,7 +33,12 @@ notes.forEach((n, i) => {
     const note = document.createElement("div");
     note.className = "note";
     note.style.rotate = (i * 37 % 9) - 4 + "deg";
-    note.innerHTML = `<p>${n.text}</p> <span class="sign">- ${n.name}</span>`;
+    const text = document.createElement("p");
+    text.textContent = n.text;
+    const sign = document.createElement("span");
+    sign.className = "sign";
+    sign.textContent = "- " + n.name;
+    note.append(text, sign)
     world.appendChild(note);
 
     const w = note.offsetWidth;

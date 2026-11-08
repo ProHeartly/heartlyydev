@@ -24,3 +24,7 @@ Before doing any of the mail and review stuff, I wanted to see how the notes act
 ***No overlapping~***  This was the fun part. Before placing a note, I measure its real size first (long notes are taller), then check if that spot is free, if it's not, it goes round the spot in bigger and bigger circle till it finds a free one.
 
 ![alt text](/images/image53.png)
+
+3) Making the flow:
+
+**Important note:** I forgot to mention but one thing that I deeply thought of was, hashing the mail of the user (I really don't want the visitors feel uncomfortable for letting me have their mail, I WILL be hasing their mails when storing! so like same mails can't post twice while not storing it too.)

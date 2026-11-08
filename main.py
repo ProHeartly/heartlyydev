@@ -175,7 +175,20 @@ def sync_projects():
     temp = projects_path.with_suffix(".tmp")
     temp.write_text(json.dumps(projects, indent=2, ensure_ascii=False), encoding="utf-8")
     temp.replace(projects_path)
-    
+
+notes_codes = {} # mail -> code, time, tries
+code_asks = {} # ip -> times they asked for a code
+
+# hasing
+def scramble(email):
+    return hashlib.sha256(email.encode()).hexdigest()
+
+def already_posted(email):
+    notes = json.loads(notes_path.read_text(encoding="utf-8"))
+    return any(n["email"] == scramble(email) for n in notes)
+
+def oops(error):
+    return {"ok": False, "error": error}
 
 @app.get("/")
 def index(request: Request):
@@ -351,7 +364,9 @@ def contact_send(request: Request, msg: str = Form(""), reply: str = Form(""), w
 
 @app.get("/notes")
 def notes(request: Request):
-    return src.TemplateResponse(request=request, name="notes.html")
+    notes = json.loads(notes_path.read_text(encoding="utf-8"))
+    shown = [{"text": n["text"], "name": n["name"], "x": n["x"], "y": n["y"]} for n in notes if n["show"]]
+    return src.TemplateResponse(request=request, name="notes.html", context={"notes": shown})
 
 def sync_loop():
     while True:
