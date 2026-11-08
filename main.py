@@ -405,6 +405,7 @@ def notes_add(email: str = Form(""), code: str = Form(""), text: str = Form(""),
     if already_posted(email):
         return oops("this email already added a note :)")
 
+    key = secrets.token_urlsafe(16) # random secret, only goes in my mail
     name = name.strip()[:30] or "anonymous"
     notes = json.loads(notes_path.read_text(encoding="utf-8"))
     notes.append({
@@ -414,7 +415,8 @@ def notes_add(email: str = Form(""), code: str = Form(""), text: str = Form(""),
         "y": y,
         "email": scramble(email),
         "date": str(date.today()),
-        "show": False # I make it true after review
+        "show": False, # I make it true after review
+        "key": key
     })
 
     temp = notes_path.with_suffix(".tmp")
@@ -422,9 +424,21 @@ def notes_add(email: str = Form(""), code: str = Form(""), text: str = Form(""),
     temp.replace(notes_path)
 
     del notes_codes[email]
-    send_mail("new note on heartlyy.dev", f"{text}\n\n- {name}")
-    
+    send_mail("new note on heartlyy.dev", f"{text}\n\n- {name}\n\n accept: https://heartlyy.dev/notes/accept/{key}")
+
     return {"ok": True}
+
+@app.get("/notes/accept/{key}")
+def notes_accept(key: str):
+    notes = json.loads(notes_path.read_text(encoding="utf-8"))
+    for n in notes:
+        if n.get("key") == key:
+            n["show"] = True
+
+    temp = notes_path.with_suffix(".tmp")
+    temp.write_text(json.dumps(notes, indent=2, ensure_ascii=False), encoding="utf-8")
+    temp.replace(notes_path)
+    return RedirectResponse("/notes", status_code=303)
 
 def sync_loop():
     while True:
