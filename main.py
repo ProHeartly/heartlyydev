@@ -14,6 +14,7 @@ import urllib.parse
 from starlette.middleware.sessions import SessionMiddleware
 import re
 import threading
+import hashlib
 
 import smtplib
 from email.message import EmailMessage
@@ -27,13 +28,13 @@ MAIL_PASS = os.environ.get("MAIL_PASS")
 current_code = None
 code_time = 0
 
-# this sends the code to our mail
-def send_code(code):
+# this sends the code to given mail
+def send_code(to, code):
     msg = EmailMessage()
-    msg["Subject"] = f"Your code: {code}"
+    msg["Subject"] = f"Code for heartlyy.dev"
     msg["From"] = "heartly@user.hackclub.app"
-    msg["To"] = ADMIN_MAIL
-    msg.set_content(f"Your login code is {code}")
+    msg["To"] = to
+    msg.set_content(f"Your code is {code}, please don't share with others :D")
 
     with smtplib.SMTP("mx.user.hackclub.app", 587, timeout=20) as s:
         s.starttls()
@@ -69,6 +70,7 @@ src = Jinja2Templates(directory="src")
 gallery_path = Path("content/gallery")
 caption_path = Path("content/caption.json")
 projects_path = Path("content/projects.json")
+notes_path = Path("content/notes.json")
 
 blogs_dir = Path("content/blogs")
 
@@ -213,7 +215,7 @@ def send_code_route():
     global current_code, code_time
     current_code = f"{secrets.randbelow(1000000):06d}"
     code_time = time.time()
-    send_code(current_code)
+    send_code(ADMIN_MAIL, current_code)
     return RedirectResponse("/gallery-upload", status_code=303)
 
 @app.post("/gallery-upload/login")
@@ -346,6 +348,10 @@ def contact_send(request: Request, msg: str = Form(""), reply: str = Form(""), w
 
     send_mail("new msg from heartlyy.dev", f"{msg[:2000]}\n\nreply to: {reply or 'not given'}", reply)
     return {"ok": True}
+
+@app.get("/notes")
+def notes(request: Request):
+    return src.TemplateResponse(request=request, name="notes.html")
 
 def sync_loop():
     while True:
