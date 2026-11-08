@@ -48,3 +48,14 @@ The popup is just a `<dialog>`, which is built into html. `showModal()` gives it
 * it saves to `notes.temp` first and then swaps it in, same as `projects.json`, so the file never gets half written
 
 ![alt text](/images/image55.png)
+
+4) Accepting notes from the mail itself:
+Opening the server, going to `notes.json` with nano and changing `false` to `true` every single time was kinda hectic. SOOO now I added a system to accept that straight from my mail with one tap
+
+**How it works:**
+* when soemone posts a note, it gets a random *key* (`secrets.token_urlsafe(16)`), which is saved with the note in `notes.json`
+* the mail I get has their note, their name (optional), and an accept link like `heartlyy.dev/notes/accept/<key>`
+* when I tap it, the server fidns the note with that key, flips `"show"` to `true` and redirects to `/notes` so I can see it go up right away
+* if it's something with slurs or anything bad in general, I just don't tap it and it will stay hidden.
+
+![alt text](/images/image56.png)
