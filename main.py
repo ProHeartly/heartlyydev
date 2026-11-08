@@ -368,6 +368,64 @@ def notes(request: Request):
     shown = [{"text": n["text"], "name": n["name"], "x": n["x"], "y": n["y"]} for n in notes if n["show"]]
     return src.TemplateResponse(request=request, name="notes.html", context={"notes": shown})
 
+@app.post("/notes/send-code")
+def notes_send_code(request: Request, email: str = Form("")):
+    email = email.strip().lower()
+    if already_posted(email):
+        return oops("this email already added a note :)")
+
+    # max 5 codes an hour
+    ip = request.headers.get("x-forwarded-for", request.client.host).split(",")[0]
+    now = time.time()
+    code_asks[ip] = [t for t in code_asks.get(ip, []) if now - t < 3600]
+    if len(code_asks[ip]) >= 5:
+        return oops("too many codes, try later")
+
+    code_asks[ip].append(now)
+
+    code = f"{secrets.randbelow(1000000):06d}"
+    notes_codes[email] = {"code": code, "time": now, "tries": 0}
+    send_code(email, code)
+    return {"ok": True}
+
+@app.post("/notes/add")
+def notes_add(email: str = Form(""), code: str = Form(""), text: str = Form(""), name: str = Form(""), x: int = Form(0), y: int = Form(0)):
+    email = email.strip().lower()
+    saved = notes_codes.get(email)
+
+    if not saved or time.time() - saved["time"] > 600:
+        return oops("code expired, get a new one")
+
+    if code.strip() != saved["code"]:
+        saved["tries"] += 1
+        if saved["tries"] >= 5:
+            del notes_codes[email] # too many guesses
+        return oops("wrong code")
+
+    if already_posted(email):
+        return oops("this email already added a note :)")
+
+    name = name.strip()[:30] or "anonymous"
+    notes = json.loads(notes_path.read_text(encoding="utf-8"))
+    notes.append({
+        "text": text.strip()[:200],
+        "name": name,
+        "x": x,
+        "y": y,
+        "email": scramble(email),
+        "date": str(date.today()),
+        "show": False # I make it true after review
+    })
+
+    temp = notes_path.with_suffix(".tmp")
+    temp.write_text(json.dumps(notes, indent=2, ensure_ascii=False), encoding="utf-8")
+    temp.replace(notes_path)
+
+    del notes_codes[email]
+    send_mail("new note on heartlyy.dev", f"{text}\n\n- {name}")
+    
+    return {"ok": True}
+
 def sync_loop():
     while True:
         try:
@@ -376,7 +434,7 @@ def sync_loop():
             pass
         time.sleep(3600)
 
-# threading.Thread(target=sync_loop, daemon=True).start()
+threading.Thread(target=sync_loop, daemon=True).start()
 
 if __name__ == "__main__":
     import uvicorn

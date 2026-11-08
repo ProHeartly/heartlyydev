@@ -23,7 +23,46 @@
         <div class="world"></div>
     </main>
 
-    <button type="button" class="add">add note</button>
+    <button type="button" class="add">Add Note</button>
+
+    <dialog class="box">
+        <section class="step" data-step="rules">
+            <h2>Before you write</h2>
+            <ul>
+                <li>You can only add a single note</li>
+                <li>You will need to verify your email (I only save a scrambled version of it, never the actual email)</li>
+                <li>Please be respectful and don't write anything racial, swears, or anything bad in general.</li>
+            </ul>
+            <div class="row">
+                <button type="button" class="ghost close">Nah</button>
+                <button type="button" class="next">I agree to the rules</button>
+            </div>
+        </section>
+
+        <form class="step" data-step="email" hidden>
+            <h2>Your Email</h2>
+            <p>I'll send you a code to check it's really you.</p>
+            <input type="email" name="email" placeholder="you@mail.com" required>
+            <p class="error"></p>
+            <button type="submit">Send code</button>
+        </form>
+
+        <form class="step" data-step="write" hidden>
+            <h2>Write your note</h2>
+            <p>check your mail for the code (spam folder too!)</p>
+            <input type="text" name="code" placeholder="000000" inputmode="numeric" maxlength="6" required>
+            <input type="text" name="name" placeholder="sign it as (optional)" maxlength="30">
+            <textarea name="text" placeholder="Hiiii! its soo cooll" maxlength="200" required></textarea>
+            <p class="error"></p>
+            <button type="submit">Post</button>
+        </form>
+
+        <section class="step" data-step="done" hidden>
+            <h2>Done!</h2>
+            <p>your note is in queue! it'll show up here once I check it.</p>
+            <button type="button" class="close">Ok</button>
+        </section>
+    </dialog>
 
     <script>const notes = {{ notes | tojson }};</script>
     <script src="/static/notes.js"></script>

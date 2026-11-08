@@ -1,5 +1,7 @@
 const canvas = document.querySelector(".canvas");
 const world = document.querySelector(".world");
+const box = document.querySelector(".box");
+let email = "";
 
 let panX = 0;
 let panY = 0;
@@ -84,3 +86,39 @@ canvas.onwheel = e => {
 
 window.onresize = move;
 move();
+
+function show(step) {
+    box.querySelectorAll(".step").forEach(s => s.hidden = s.dataset.step !== step);
+}
+
+document.querySelector(".add").onclick = () => {
+    show("rules");
+    box.showModal();
+}
+
+box.querySelectorAll(".close").forEach(b => b.onclick = () => box.close());
+box.querySelector(".next").onclick = () => show("email");
+
+async function send(form, url, data) {
+    const res = await fetch(url, { method: "POST", body: data });
+    const out = await res.json();
+    form.querySelector(".error").textContent = out.error || "";
+    return out.ok;
+}
+
+const emailForm = box.querySelector('[data-step="email"]');
+emailForm.onsubmit = async e => {
+    e.preventDefault();
+    email = emailForm.email.value;
+    if (await send(emailForm, '/notes/send-code', new FormData(emailForm))) show("write");
+};
+
+const writeForm = box.querySelector('[data-step="write"]');
+writeForm.onsubmit = async e => {
+    e.preventDefault();
+    const data = new FormData(writeForm);
+    data.append("email", email);
+    data.append("x", Math.round(-panX));
+    data.append("y", Math.round(-panY));
+    if (await send(writeForm, "/notes/add", data)) show("done");
+};

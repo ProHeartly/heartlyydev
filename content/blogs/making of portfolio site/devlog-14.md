@@ -28,3 +28,23 @@ Before doing any of the mail and review stuff, I wanted to see how the notes act
 3) Making the flow:
 
 **Important note:** I forgot to mention but one thing that I deeply thought of was, hashing the mail of the user (I really don't want the visitors feel uncomfortable for letting me have their mail, I WILL be hasing their mails when storing! so like same mails can't post twice while not storing it too.)
+
+**Adding a note:**
+* you press *add note* and a popup shows the rules first
+* if you pressed *I agree*, you can type out your mail and the server sends yo ua 6 digit code
+* then after you type the code, an optional "sign it as" name (empty = `anonymous`), and your note appears
+* the note gets saved in `notes.json` with `"show": false`, so it's in the queue and I get a mail that someone has added a note
+* I read it, and if it's okay I put `"show": true`, and it shows up on the board on the refresh
+
+The popup is just a `<dialog>`, which is built into html. `showModal()` gives it a dark backdrop and closes on Esc for free! Each step is a section that like hide/show one at a time.
+![alt text](/images/image54.png)
+
+**Security stuff (cuz people will try thingssz):**
+* one note per mail: it checks the hashed mail against every note in `notes.json`, both before sending the code and before saving
+* codes only work for 10 mins, and after 5 wrong guesses the code dies, so nobody can guess it
+* max 5 codes an hour per person, so nobody can use my site to spam other people's mailss
+* notes are shown with `textContent` instead of `innerHTML`, so if someone writes html or a script in their note, it just shows up as plain text instead of running on my page (against XSS)
+* only text, name and position are sent to the page, the hashed mail never leaves the server
+* it saves to `notes.temp` first and then swaps it in, same as `projects.json`, so the file never gets half written
+
+![alt text](/images/image55.png)
