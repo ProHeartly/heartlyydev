@@ -1,6 +1,8 @@
 {% extends "blog_base.html" %}
 
-{% block title %}Blogs{% endblock %}
+{% set title = "The Heartlyy Times" %}
+{% set desc = "Heyy! check these devlogs and random thoughts, in newspaper style." %}
+
 {% block edition %}Front Page{% endblock %}
 
 {% block content %}
@@ -9,7 +11,7 @@
     <a class="front-item" href="/blogs/{{ b.name | urlencode }}">
         <div class="kicker">
             <i class="ph-duotone ph-folder"></i>
-            <span>{{ b.count }} pages</span>
+            <span>{{ b.count }} {{ "post" if b.count == 1 else "posts" }}</span>
         </div>
         <h2 class="front-headline">{{ b.name }}</h2>
         <p class="front-latest">Latest: <em>{{ b.latest.title }}</em></p>

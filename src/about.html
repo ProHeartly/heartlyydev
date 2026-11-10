@@ -6,7 +6,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heartlyy | About me</title>
+    {% set title = "Heartlyy | About me" %}
+    {% set desc = "Heyy! I'm Rasim, 17 year old maker from Nepal, obsessed with building things (and sometimes breaking them)" %}
+    {% include "meta.html" %}
     <link rel="stylesheet" href="/static/about_style.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
@@ -32,7 +34,7 @@
         <div class="box hero">
             <div class="inner">
                 <h1>Heyy, I'm Rasim</h1>
-                <p class="line">Uhhhhhh bla bla bla bla bla bla bla blabla</p>
+                <p class="line">a 17-year old maker from Nepal, obsessed with building things (and sometimes breaking them)</p>
             </div>
         </div>
 
@@ -44,7 +46,17 @@
 
         <div class="box story from-l2">
             <div class="inner">
-                <h2>SMTH</h2>
+                <p>
+                    Web: smooth animations, FastAPI/Flask backends, and even custom fonts
+
+                    Hardware: Minecraft TNT alarm clock (3D model + firmware), 2nd place in a line-following robot race, participant of AI for good youth challenge 2026 Nationals
+
+                    ML: a plant disease classifier, and HeritageNet, which recognises Nepali heritage sites from photos (as a part of uunchai cohert 2026)
+
+                    Terminal: a full music player and 2-player chess, all in the terminal
+
+                    Browser extension: Nightflash, an extension on Chrome and Firefox
+                </p>
             </div>
         </div>
 

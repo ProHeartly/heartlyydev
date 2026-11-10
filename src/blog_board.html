@@ -1,6 +1,8 @@
 {% extends "blog_base.html" %}
 
-{% block title %}{{ board }}{% endblock %}
+{% set title = board ~ " | The Heartlyy Times" %}
+{% set desc = "Heyy! check all this posts in " ~ board %}
+
 {% block edition %}{{ board }} Selection{% endblock %}
 
 {% block content %}
