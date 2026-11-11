@@ -34,3 +34,19 @@ It's exported in 3 sizes: `favicon.svg` (basically svg format), `favicon.png` (3
 ![alt text](/images/image58.png)
 ![alt text](/images/image59.png)
 
+**Change 4:** Originally, when someone visited a directory which doesn't exists, this showed up
+
+![alt text](/images/image60.png)
+
+but lets change it to something cool, shall we???
+So I made an animated page, basically its animated like the zero acts as a eye which closes from time to time
+![alt text](/images/image61.png)
+
+uhmm, you can look at the frames but idk how to show it thru images
+![image](/static/404amn.png)
+
+**How it works:**
+* all 4 frams are drawn side by side in one png (a sprite sheet), so the browser only loads one image a time
+* the png is used as a mask, which means only its shape matters, not its colour. The color comes from `--text-color`, so its theme changable
+* a css animation jumps between the 4 frames with `step-end`, so it snaps from frame to frame instead of sliding
+* and if someone turned off animations in their settings, it just stays still

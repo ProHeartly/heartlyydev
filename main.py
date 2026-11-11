@@ -444,6 +444,10 @@ def notes_accept(key: str):
     temp.replace(notes_path)
     return RedirectResponse("/notes", status_code=303)
 
+@app.exception_handler(404)
+def not_found(request: Request, exc):
+    return src.TemplateResponse(request=request, name="404.html", status_code=404)
+
 def sync_loop():
     while True:
         try:
@@ -452,7 +456,7 @@ def sync_loop():
             pass
         time.sleep(3600)
 
-threading.Thread(target=sync_loop, daemon=True).start()
+# threading.Thread(target=sync_loop, daemon=True).start()
 
 if __name__ == "__main__":
     import uvicorn

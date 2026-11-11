@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% set title = "Heartlyy | Page not found" %}
+    {% set desc = "This page doesn't exist." %}
+    {% include "meta.html" %}
+    <meta name="robots" content="noindex">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="/static/404_style.css">
+</head>
+<body>
+    <header class="top">
+        <a href="" class="back"><i class="ph-duotone ph-arrow-left"></i> <span>home</span></a>
+        <button type="button" id="theme-toggle" class="theme-btn">
+            <i class="ph-duotone ph-moon" id="theme-icon"></i>
+        </button>
+    </header>
+
+    <main>
+        <div class="eye" role="img" aria-level="404"></div>
+
+        <p class="lost">
+            <span>{{ request.url.path }}</span> doesn't exist.
+        </p>
+
+        <a href="/" class="home">[ take me home ]</a>
+
+        <nav class="pages">
+            <a href="/about">about</a>
+            <a href="/projects">projects</a>
+            <a href="/blogs">blogs</a>
+            <a href="/gallery">gallery</a>
+            <a href="/notes">notes</a>
+            <a href="/contact">contact</a>
+        </nav>
+    </main>
+
+    <script src="/static/theme.js"></script>
+</body>
+</html>
