@@ -105,9 +105,13 @@ def read_post(file):
         "html": markdown.markdown(text, extensions=["fenced_code", "tables"])
     }
 
+# "devlog-11" -> ["devlog-", "11", ""], so like 11 is conpared as number not text
+def natural_sorting(text):
+    return [int(part) if part.isdigit() else part for part in re.split(r"(\d+)", text)]
+
 def get_posts(folder):
     posts = [read_post(f) for f in folder.glob("*.md")]
-    posts.sort(key=lambda p: (p["date"], p["slug"]), reverse=True)
+    posts.sort(key=lambda p: (p["date"], natural_sorting(p["slug"])), reverse=True)
     return posts
 
 
