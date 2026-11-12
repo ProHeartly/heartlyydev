@@ -84,3 +84,13 @@ and made `scroll.js` for other pages which has normal scrolling behaviour
 **Small things that I really made sure of:**
 * ctrl + scroll still works, same as change 6.
 * trackpads already have their own smooth scrolling, so adding mine on top made it feel floaty. Now small trackpad movement are left alone. (returned)
+
+
+**change 8:**
+So I found one issue with now-playing thingyyy.. in small screens, the text gets clamped and THE main issue was the record thingy which was supposed to be circle becomes oval..
+![alt text](/images/image62.png)
+
+to this
+![alt text](/images/image63.png)
+
+I first of all, made the text size: `font-size: clamp(2.4rem, min(6vw, 10vh), 4rem);` which makes the text more fitting and for records i changed how it had fixed height and width, to being `height: min(250px, 65%);` and aspect ratio: `aspect-ratio: 1;` which means the width is auto adjusted to be same as height.
