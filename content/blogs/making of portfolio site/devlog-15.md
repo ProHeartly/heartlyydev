@@ -51,4 +51,25 @@ uhmm, you can look at the frames but idk how to show it thru images
 * a css animation jumps between the 4 frames with `step-end`, so it snaps from frame to frame instead of sliding
 * and if someone turned off animations in their settings, it just stays still
 
-**Change 5:** 
+**Change 5:** Making the homepage animation catch up when scrolling goes zooommmm(not zoom, like very fastt)
+
+I'm a big fan of my own creation, the homepage animation but the problem is it slowly slides for like 2 seconds and it might be still half way in, if you scroll very fast. I do like it being 2 seconds, i dont wana reduce it, sooo a new approach which I could think of was...
+
+Now animation speed changes depending on how fast YOU are scrolling
+
+**How it works:**
+* everytime the page scrolls, `animation.js` checks how far it moved, and how much time passed, which gives the scroll speed (in pixels per millisecond)
+* it smooths that speed a bit (`speed * 0.6 + v * 0.4`) so one jumpy frame doesn't counts
+* if you stopped scrolling for 150ms, it counts as not crolling at all
+* when a card comes into view, it gets a `--pace` from that speed: where 1 means the full slow animation, smaller means faster animation sleepd but it never goes below `0.3`(about 3 times quicker)
+* in the css, every duration is just multiplied by it, like `calc(2s * var(--pace, 1))`, and the delay between cards too
+
+I tuned it with `fast * 0.2`, so it only speeds up for real flicks, normal scrolling still gets almost the full satisfying animation.
+
+**Change 6:** Fixing `scroll.js`
+
+Soo I found few problems with our current `scroll.js`, it's not that it doesn't work but the issue lies in what it is preventing.
+* zooming doesn't work: it uses `preventDefault()` to take over the mouse wheel, which also blocked ctrl + scroll zoom, and even pinch to zoom features
+* swiping sideways on a trackingpad did nothing, its cuz originally it only relied on `deltaY` and ignored `deltaX` which is the side ways scrolling.
+
+SO to fix this, first of all, i made a escape case for when `ctrl` key is pressed and lets browsers zoom, and other thing is I added `const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;` this statement to calculate the `delta` instead of fully relying on `deltaY`

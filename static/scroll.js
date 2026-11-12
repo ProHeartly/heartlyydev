@@ -32,13 +32,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     container.addEventListener("wheel", (e) => {
         if (window.innerWidth <= 700) return;
+        if (e.ctrlKey) return;
         e.preventDefault();
 
         if (!isAnimating) {
             scrollPos = container.scrollLeft
         }
 
-        velocity += e.deltaY * 0.18; // kinda like momentum
+        const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+        velocity += delta * 0.18; // kinda like momentum
 
         if (!isAnimating) {
             isAnimating = true;
