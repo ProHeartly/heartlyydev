@@ -1,50 +1,39 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const container = document.querySelector(".main");
+    const page = document.scrollingElement;
 
-    let scrollPos = container.scrollLeft;
+    let pos = page.scrollTop;
     let velocity = 0;
-    let isAnimating = false;
+    let moving = false;
 
-    function Animate() {
-        if (!isAnimating) return;
+    function animate() {
+        velocity *= 0.92; // friction, same as home page
+        pos += velocity;
 
-        velocity *= 0.92; // This is friction / damping
-        scrollPos += velocity;
-
-        const maxScroll = container.scrollWidth - container.clientWidth;
-
-        if (scrollPos<0) {
-            scrollPos = 0;
-            velocity = 0;
-        } else if (scrollPos > maxScroll) {
-            scrollPos = maxScroll;
+        const max = page.scrollHeight - window.innerHeight;
+        if (pos < 0 || pos > max) {
+            pos = Math.max(0, Math.min(max, pos));
             velocity = 0;
         }
 
-        container.scrollLeft = scrollPos;
+        page.scrollTop = pos;
 
         if (Math.abs(velocity) > 0.1) {
-            requestAnimationFrame(Animate);
+            requestAnimationFrame(animate);
         } else {
-            isAnimating = false;
+            moving = false;
         }
     }
 
-    container.addEventListener("wheel", (e) => {
-        if (window.innerWidth <= 700) return;
-        if (e.ctrlKey) return;
+    window.addEventListener("wheel", e => {
+        if (e.ctrlKey || Math.abs(e.deltaY) < 40) return;
         e.preventDefault();
 
-        if (!isAnimating) {
-            scrollPos = container.scrollLeft
+        if (!moving) {
+            pos = page.scrollTop;
+            moving = true;
+            requestAnimationFrame(animate);
         }
 
-        const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-        velocity += delta * 0.18; // kinda like momentum
-
-        if (!isAnimating) {
-            isAnimating = true;
-            requestAnimationFrame(Animate);
-        }
-    }, {passive: false});
+        velocity += e.deltaY * 0.18;
+    }, {passive: false})
 });

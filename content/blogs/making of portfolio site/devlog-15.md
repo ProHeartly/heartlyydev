@@ -73,3 +73,5 @@ Soo I found few problems with our current `scroll.js`, it's not that it doesn't 
 * swiping sideways on a trackingpad did nothing, its cuz originally it only relied on `deltaY` and ignored `deltaX` which is the side ways scrolling.
 
 SO to fix this, first of all, i made a escape case for when `ctrl` key is pressed and lets browsers zoom, and other thing is I added `const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;` this statement to calculate the `delta` instead of fully relying on `deltaY`
+
+**Change 7:** 
