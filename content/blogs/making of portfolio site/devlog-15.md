@@ -50,3 +50,5 @@ uhmm, you can look at the frames but idk how to show it thru images
 * the png is used as a mask, which means only its shape matters, not its colour. The color comes from `--text-color`, so its theme changable
 * a css animation jumps between the 4 frames with `step-end`, so it snaps from frame to frame instead of sliding
 * and if someone turned off animations in their settings, it just stays still
+
+**Change 5:** 
