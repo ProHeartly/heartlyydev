@@ -94,3 +94,12 @@ to this
 ![alt text](/images/image63.png)
 
 I first of all, made the text size: `font-size: clamp(2.4rem, min(6vw, 10vh), 4rem);` which makes the text more fitting and for records i changed how it had fixed height and width, to being `height: min(250px, 65%);` and aspect ratio: `aspect-ratio: 1;` which means the width is auto adjusted to be same as height.
+
+**Change 9:** One random idea which I had was making a little different loading animation for playing-now.
+
+So the animation goes like:
+* the card slides in same way like others
+* then the record rolls from the left, like a wheel and ngl it kinda looked cleann
+* "I'm listening to" text drops into its place
+* the song name wipes in from left to right, first the filled text then the outline thingy gets filled
+* lastly, the listen button rises

@@ -326,6 +326,67 @@ body {
     text-decoration: underline;
 }
 
+/* music card animation thingyyy */
+.card.a .record-wrapper {
+    opacity: 0;
+    transform: translateX(-260px) rotate(-120deg);
+    transition: opacity 0.4s, transform 0.6s;
+}
+
+.card.a.in-view .record-wrapper {
+    opacity: 1;
+    transform: none;
+    transition:
+        opacity calc(1.3s * var(--pace)) ease calc(var(--delay) + 0.5s * var(--pace)),
+        transform calc(2.9s * var(--pace)) cubic-bezier(0.16, 1, 0.3, 1) calc(var(--delay) + 0.5s * var(--pace));
+}
+
+.card.a .track-back,
+.card.a .track-front {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.4s, color 0.4s ease;
+}
+
+.card.a.in-view .track-back {
+    clip-path: inset(0 0 0 0);
+    transition:
+        clip-path calc(1.8s * var(--pace)) cubic-bezier(0.65, 0, 0.35, 1) calc(var(--delay) + 1.3s * var(--pace)),
+        color 0.4s ease;
+}
+
+.card.a.in-view .track-front {
+    clip-path: inset(0 0 0 0);
+    transition:
+        clip-path calc(1.8s * var(--pace)) cubic-bezier(0.65, 0, 0.35, 1) calc(var(--delay) + 1.5s * var(--pace)),
+        color 0.4s ease;
+}
+
+.card.a .what {
+    transform: translateY(-16px);
+    transition: opacity 0.4s, transform 0.4s;
+}
+
+.card.a.in-view .what {
+    transform: none;
+    transition:
+        opacity 0.6s,
+        transform calc(1.9s * var(--pace)) cubic-bezier(0.16, 1, 0.3, 1) calc(var(--delay) + 1s * var(--pace));
+}
+
+.card.a .listen-btn {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.card.a.in-view .listen-btn {
+    opacity: 1;
+    transform: none;
+    transition:
+        opacity calc(1.3s * var(--pace)) ease calc(var(--delay) + 1.9s * var(--pace)),
+        transform calc(1.9s * var(--pace)) cubic-bezier(0.16, 1, 0.3, 1) calc(var(--delay) + 1.9s * var(--pace));
+}
+
 @media (max-width: 700px) {
     html,
     body {
@@ -412,5 +473,23 @@ body {
         bottom: auto;
         top: 16px;
         font-size: 0.85rem;
+    }
+
+    .card.a .record-wrapper {
+        transform: translateX(-140px) rotate(-100deg);
+    }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+    .card.a .record-wrapper,
+    .card.a .track-back,
+    .card.a .track-front,
+    .card.a .what,
+    .card.a .listen-btn {
+        opacity: 1;
+        transform: none;
+        clip-path: none;
+        transition: none;
     }
 }
