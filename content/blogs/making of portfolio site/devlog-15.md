@@ -74,4 +74,13 @@ Soo I found few problems with our current `scroll.js`, it's not that it doesn't 
 
 SO to fix this, first of all, i made a escape case for when `ctrl` key is pressed and lets browsers zoom, and other thing is I added `const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;` this statement to calculate the `delta` instead of fully relying on `deltaY`
 
-**Change 7:** 
+**Change 7:** Added momentum scrolling to other pages as well!
+
+Soo the home page had momentum scroll which is also often called acceleration scroll, which is basically, the scrolling works like it has momentum and doesn't stop the exact moment that we stop scrolling, and scrolls for a little bit longer, which is just so coolll so we will be making that in our site on other pages too which doesn't have custom scroll animation. Its kinda same logic as our original scrolling
+
+Now what i did is: change `scroll.js` to `side_scroll.js` and this is for `index.html`
+and made `scroll.js` for other pages which has normal scrolling behaviour
+
+**Small things that I really made sure of:**
+* ctrl + scroll still works, same as change 6.
+* trackpads already have their own smooth scrolling, so adding mine on top made it feel floaty. Now small trackpad movement are left alone. (returned)
