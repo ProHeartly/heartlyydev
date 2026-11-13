@@ -37,3 +37,51 @@ html:active-view-transition-type(to-home)::view-transition-new(root) {
         transform: translateX(-100%);
     }
 }
+
+/* blog -> deeper */
+html:active-view-transition-type(blog-in)::view-transition-new(root) {
+    animation: sheet-in 1.2s ease both;
+    box-shadow: 0 -30px 90px rgba(0, 0, 0, 0.2);
+}
+
+html:active-view-transition-type(blog-in)::view-transition-old(root) {
+    animation: none;
+}
+
+html:active-view-transition-type(blog-in) * {
+    animation-play-state: paused !important;
+}
+
+@keyframes sheet-in {
+    from {
+        transform: translateY(100%);
+    }
+}
+
+/* deeper -> blogs */
+html:active-view-transition-type(blog-out)::view-transition-old(root) {
+    z-index: 1;
+    animation: sheet-out 1.2s ease-in both;
+    box-shadow: 0 -30px 90px rgba(0, 0, 0, 0.2); 
+}
+
+html:active-view-transition-type(blog-out)::view-transition-new(root) {
+    animation: none;
+}
+
+html:active-view-transition-type(blog-out) * {
+    animation-play-state: paused !important;
+}
+
+@keyframes sheet-out {
+    to {
+        transform: translateY(100%);
+    }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+    @view-transition {
+        navigation: none;
+    }
+}
