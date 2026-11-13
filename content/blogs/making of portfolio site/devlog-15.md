@@ -103,3 +103,14 @@ So the animation goes like:
 * "I'm listening to" text drops into its place
 * the song name wipes in from left to right, first the filled text then the outline thingy gets filled
 * lastly, the listen button rises
+
+ **Change 10:** What I noticed was, jummping from one page to another was little unpleasent like i felt something was missing.. so I thought of animating that too.
+
+Testing with different animations, some like expanding the card seemed kinda good animation at first but different pages had different `--card-bg` value so it seemed glitchy. Another animation which I tried was fade-in fade-out animation which is classy but didn't stand out too much for me. So I ended up going with something like cover up animation from ppt ;).
+
+This has two varients:
+* jumping from index to other page goes as cover up from right to left.
+* going back to index goes as the cover moving to left to reveal the home page behind.
+
+So in technical words:
+In `transitions.js`, `e.viewTransition.types.add("from-home");` this statement is used to add a transition type name, and when going to other pages from home, its used to denote, we are comming from home and hence, the css in `transitions.css`, `html:active-view-transition-type(from-home)::view-transition-new(root)` this element is the comming one and we add animation to this
