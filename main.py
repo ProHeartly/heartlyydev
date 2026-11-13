@@ -1,7 +1,6 @@
 import os
 import time
 import secrets
-import markdown
 from datetime import date
 from pathlib import Path
 from fastapi import FastAPI, Request, UploadFile, File, Form, HTTPException
@@ -15,6 +14,11 @@ from starlette.middleware.sessions import SessionMiddleware
 import re
 import threading
 import hashlib
+
+
+from markdown_it import MarkdownIt
+md = MarkdownIt("commonmark").enable(["table", "strikethrough"])
+
 
 import smtplib
 from email.message import EmailMessage
@@ -102,7 +106,7 @@ def read_post(file):
         "date": info.get("date", ""),
         "summary": info.get("summary", first_line),
         "has_summary": "summary" in info,
-        "html": markdown.markdown(text, extensions=["fenced_code", "tables"])
+        "html": md.render(text)
     }
 
 # "devlog-11" -> ["devlog-", "11", ""], so like 11 is conpared as number not text
@@ -456,7 +460,7 @@ def sync_loop():
             pass
         time.sleep(3600)
 
-# threading.Thread(target=sync_loop, daemon=True).start()
+threading.Thread(target=sync_loop, daemon=True).start()
 
 if __name__ == "__main__":
     import uvicorn

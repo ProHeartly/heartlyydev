@@ -5,3 +5,4 @@ python-multipart
 markdown
 python-dotenv
 itsdangerous
+markdown-it-py
