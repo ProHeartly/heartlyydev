@@ -10,6 +10,10 @@ html:active-view-transition-type(from-home)::view-transition-new(root) {
     box-shadow: -40px 0 80px rgba(0, 0, 0, 0.2);
 }
 
+html:active-view-transition-type(from-home)::view-transition-old(root) {
+    animation: none;
+}
+
 html:active-view-transition-type(from-home) * {
     animation-play-state: paused !important;
 }

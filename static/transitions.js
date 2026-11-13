@@ -7,12 +7,9 @@ window.addEventListener("pagereveal", e => {
 
     if (from === "/") {
         e.viewTransition.types.add("from-home");
-    }
-    if (to === "/") {
+    } else if (to === "/") {
         e.viewTransition.types.add("to-home");
-    }
-
-    if (from.startsWith("/blogs") && to.startsWith("/blogs")) {
+    } else if (from.startsWith("/blogs") && to.startsWith("/blogs")) {
         const depth = path => path.split("/").filter(Boolean).length; // /blogs = 1, /blogs/devlogs = 2, /blogs/devlogs/devlog-1 = 3
         e.viewTransition.types.add(depth(to) < depth(from) ? "blog-out": "blog-in");
     }
