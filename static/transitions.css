@@ -1,0 +1,27 @@
+@view-transition {
+    navigation: auto;
+}
+
+/* index -> other pages */
+
+html:active-view-transition-type(from-home)::view-transition-new(root) {
+    transform-origin: left center;
+    animation: whoosh-in 1.2s ease both;
+    box-shadow: -40px 0 80px rgba(0, 0, 0, 0.2);
+}
+
+html:active-view-transition-type(from-home) * {
+    animation-play-state: paused !important;
+}
+
+@keyframes whoosh-out {
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes whoosh-in {
+    from {
+        transform: translateX(100%);
+    }
+}
