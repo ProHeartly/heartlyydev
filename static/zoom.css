@@ -1,0 +1,50 @@
+.paper-main img,
+.photo img {
+    cursor: zoom-in;
+}
+
+.zoom {
+    width: 100vw;
+    height: 100dvh;
+    margin: 0;
+    padding: 0;
+
+    max-width: none;
+    max-height: none;
+
+    border: none;
+    background: none;
+    cursor: zoom-out;
+}
+
+.zoom[open] {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.zoom img {
+    max-width: 92vw;
+    max-height: 84vh;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+
+.zoom::backdrop {
+    background: rgba(9, 0, 47, 0.88);
+    animation: zoom-fade 0.3s ease;
+}
+
+@keyframes zoom-fade {
+    from {
+        opacity: 0;
+    }
+}
+
+::view-transition-group(zoom) {
+    animation-duration: 0.45s;
+    animation-timing-function: ease-out;
+}

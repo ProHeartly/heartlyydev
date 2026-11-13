@@ -121,3 +121,18 @@ And I added same but little different kind of animation to blogs, it covers from
 Thus many of formatting problem are fixed.
 
 ![alt text](/images/image64.png)
+
+**Change 12:** Since we were already in matter of blog, I decided to do a little qol for the images on them, I wanted them to open like full screen when we click on them.
+
+For this, I made `zoom.js` which checks if we clicked on a img from blogs, then `zoom.css` which has the styling for the zoom.
+![alt text](/images/image65.png)
+
+and Since we already made this, I made it work for gallery too.
+
+**Behind the sceness :D:**
+* the big view is just one `<dialog>` (the html popup which is built-in), which `zoom.js` makes and sets at the end of the page. Then `showModal()` is used to open it
+* the zoom itself uses `view transition` which means it kinda has morph like animation
+* the cursor changes into magnification like cursor by using css: `cursor: zoom-in;` and it has + and - signs depending upon `cursor: zoom-in;` and `cursor: zoom-out;`
+
+**THE BUG I ran into:**
+* the big pictures were off center, turns out, it was cuz browsers give every dialog a built-in max size which is a bit smaller than the screen. So the fix was adding `max-width: none;` and `max-height:none;`.
