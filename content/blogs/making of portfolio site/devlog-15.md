@@ -116,3 +116,8 @@ So in technical words:
 In `transitions.js`, `e.viewTransition.types.add("from-home");` this statement is used to add a transition type name, and when going to other pages from home, its used to denote, we are comming from home and hence, the css in `transitions.css`, `html:active-view-transition-type(from-home)::view-transition-new(root)` this element is the comming one and we add animation to this
 
 And I added same but little different kind of animation to blogs, it covers from bottom to top and leaves to bottom.
+
+**Change 11:** Originally, I used python's `markdown` library which didn't have most of features of what vscode's or other general markdown supported so some text came in un-formatted. Like the listing like 1. , 2. and so on didn't count as list and thus showed normally but now, I'm using `markdown-it-py` which has the `commonmark`, the markdown formatting used by most.
+Thus many of formatting problem are fixed.
+
+![alt text](/images/image64.png)
