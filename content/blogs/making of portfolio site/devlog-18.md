@@ -125,4 +125,53 @@ but the issue is the light mode, the text is not clear
 
 but this didn't give the vibe that i wanted so lets try another approachhh
 
-**another attempt:** 
+**another attempt:** making a completely new design for light mode..
+
+so with `[data-theme="light"]`, i can check if the theme is light mode and if it is, we change the
+`.card.a .record` into new background like:
+```css
+[data-theme="light"] .card.a .record {
+    background:
+        /* light reflectionnn */
+        conic-gradient(
+            from 25deg,
+            transparent 0deg,
+            rgba(255, 255, 255, 0.55) 28deg,
+            rgba(255, 255, 255, 0.12) 55deg,
+            transparent 95deg,
+            transparent 180deg,
+            rgba(255, 255, 255, 0.55) 208deg,
+            rgba(255, 255, 255, 0.12) 235deg,
+            transparent 275deg
+        ),
+        
+        /* ring and other edgee */
+        radial-gradient(
+            circle,
+            transparent 0% 24%,
+            rgba(19, 34, 87, 0.12) 24.5% 33%,
+            transparent 34.5% 96%,
+            rgba(19, 34, 87, 0.18) 97% 100% 
+        ),
+        
+        /* grooves thingy (circles running out) */
+        repeating-radial-gradient(
+            circle,
+            rgba(19, 34, 87, 0.12) 0px,
+             rgba(19, 34, 87, 0.12) 1px,
+            transparent 1px,
+            transparent 3px
+        ),
+
+        /* vinyl basee */
+        color-mix(in srgb, var(--card-bg) 72%, var(--text-color) 28%);
+}
+```
+
+So here, i used lighter colors to connect with the theme :D
+
+![alt text](/images/image75.png)
+
+Now! i'm satisfied with how it looksss
+
+**small change:** I changed the width of outline of `track-front` from `2px` to `3px` which is kinda small change but huge difference
