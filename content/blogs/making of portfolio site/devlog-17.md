@@ -1,5 +1,7 @@
 # Rework for mobile layout
 
+- time: 2 hr
+
 **Current issue:** Sooo after collecting more feedbacksss, it turns outt the horizontal layout in mobile is very confusing when given without any instruction or mainly people assume, it's poorly designed or mobile responsive is not made.
 
 **My plan:** Its really simple, let's make the layout vertical for mobile where the github and theme change card get placed together.. but idk how it will turn out! lets see

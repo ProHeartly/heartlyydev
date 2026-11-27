@@ -119,3 +119,10 @@ but the issue is the light mode, the text is not clear
 
 3) Fixing the vinyl in light theme:
 
+**first attempt:** using `-webkit-text-stroke: 2px var(--bg-color);` i tried making the outer text be the color of background
+
+![alt text](/images/image74.png)
+
+but this didn't give the vibe that i wanted so lets try another approachhh
+
+**another attempt:** 
