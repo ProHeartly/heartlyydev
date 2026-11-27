@@ -391,22 +391,21 @@ body {
     html,
     body {
         height: auto;
-        overflow-x: hidden;
-        overflow-y: auto;
+        overflow-x: clip;
+        overflow-y: visible;
         overscroll-behavior: auto;
     }
 
     .main {
         height: auto;
-        min-height: 100dvh;
+        min-height: 100svh;
         width: 100%;
         padding: 12px;
         gap: 12px;
 
         display: grid;
         grid-template-columns: 1fr 1fr;
-        overflow-x: hidden;
-        overflow-y: auto;
+        overflow: visible;
 
         /* scroll-snap-type: x proximity;
         scroll-padding-left: 12px; */
@@ -429,7 +428,7 @@ body {
         grid-column: 1 / -1;
         height: auto;
         padding: 24px 16px;
-        min-height: 35dvh;
+        min-height: 35svh;
     }
 
     .card.b,
@@ -440,7 +439,7 @@ body {
         grid-column: 1 / -1;
         height: auto;
         padding: 24px 16px;
-        min-height: 35dvh;
+        min-height: 35svh;
     }
 
     .card.c,
@@ -535,17 +534,27 @@ body {
 
     .row .card.a:not(.in-view),
     .row .card.b:not(.in-view),
-    .row .card.c:not(.in-view),
     .row .card.g:not(.in-view),
     .row .card.j:not(.in-view) {
         opacity: 0;
-        transform: translateX(-100px);
+        transform: translateX(-200px);
     }
+
     .row .card.d:not(.in-view),
     .row .card.e:not(.in-view),
-    .row .card.f:not(.in-view),
     .row .card.i:not(.in-view),
-    .row .card.h:not(.in-view) {
+    .row .card.h:not(.in-view)
+    {
+        opacity: 0;
+        transform: translateX(200px);
+    }
+
+    .row .card.c:not(.in-view) {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    .row .card.f:not(.in-view) {
         opacity: 0;
         transform: translateX(100px);
     }

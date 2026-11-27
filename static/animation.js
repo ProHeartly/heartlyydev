@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const cards = document.querySelectorAll(".card");
     const container = document.querySelector(".main");
+    const mobile = window.innerWidth <= 700;
 
     // like how fast its scrolling, in unit of pixels per millisecond
     let speed = 0;
@@ -19,19 +20,21 @@ document.addEventListener("DOMContentLoaded", () => {
         // stopped scrolling for a bit? then its really not that fast any more
         const fast = performance.now() - lastT < 150 ? speed : 0;
         //  1 = full slow animation, 0.3 = fastest (about like 3x quicker)
-        const pace = Math.max(0.3, 1 / (1 + fast * 0.2));
+        const pace = mobile ? 0.5 : Math.max(0.3, 1 / (1 + fast * 0.2));
 
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const x = entry.boundingClientRect.left / window.innerWidth;
-                entry.target.style.setProperty("--delay", `${Math.max(0, x) * 0.5 * pace}s`);
+                const delay = mobile ? 0: Math.max(0, x) * 0.5 * pace;
+                entry.target.style.setProperty("--delay", `${delay}s`);
                 entry.target.style.setProperty("--pace", pace);
                 entry.target.classList.add("in-view");
+                if (mobile) observer.unobserve(entry.target);
             } else {
                 entry.target.classList.remove("in-view");
             }
         })
-    }, {root: window.innerWidth > 700? container : null, threshold: 0.15});
+    }, {root: mobile ? null : container, threshold: 0.15});
 
     cards.forEach(card => observer.observe(card));
 });
