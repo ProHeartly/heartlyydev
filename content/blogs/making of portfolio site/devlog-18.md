@@ -175,3 +175,22 @@ So here, i used lighter colors to connect with the theme :D
 Now! i'm satisfied with how it looksss
 
 **small change:** I changed the width of outline of `track-front` from `2px` to `3px` which is kinda small change but huge difference
+
+4) Making each page follow the color pallet nowww!
+
+**About me page:** for about me, i tried to keep the original style but at last went with style of
+```css
+:root, [data-theme="dark"] {
+    --bg-color: #070b1e;
+    --card-bg: #132257;
+    --text-color: #efd083;
+}
+
+[data-theme="light"] {
+    --bg-color: #faf7f0;
+    --card-bg: #efd083;
+    --text-color: #132257;
+}
+```
+
+so here, the `card-bg` and `text-color` swaps on changing theme

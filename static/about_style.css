@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Playfair+Display:wght@700&family=Great+Vibes&family=EB+Garamond&display=swap');
 
 :root, [data-theme="dark"] {
-    --bg-color: #09002f;
-    --card-bg: #004EB9;
-    --text-color: #a1b1ff;
+    --bg-color: #070b1e;
+    --card-bg: #132257;
+    --text-color: #efd083;
 }
 
 [data-theme="light"] {
-    --bg-color: #f4f5fc;
-    --card-bg: #a1b1ff;
-    --text-color: #004EB9;
+    --bg-color: #faf7f0;
+    --card-bg: #efd083;
+    --text-color: #132257;
 }
 
 ::view-transition-old(root),
