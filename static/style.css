@@ -234,15 +234,45 @@ body {
     border-radius: 50%;
     cursor: pointer;
     
-    background: 
-        conic-gradient(from 0deg,
-            transparent 0deg, rgba(255, 255, 255, 0.15) 40deg, transparent 90deg,
-            transparent 180deg, rgba(255, 255, 255, 0.15) 220deg, transparent 270deg),
-        repeating-radial-gradient(circle,
-            rgba(0, 0, 0, 0.1) 0 1px, transparent 1px 3px),
-        var(--card-bg);
+    background:
+        /* light reflectionnn */
+        conic-gradient(
+            from 25deg,
+            transparent 0deg,
+            rgba(255, 255, 255, 0.16) 28deg,
+            rgba(255, 255, 255, 0.03) 55deg,
+            transparent 95deg,
+            transparent 180deg,
+            rgba(255, 255, 255, 0.16) 208deg,
+            rgba(255, 255, 255, 0.03) 235deg,
+            transparent 275deg
+        ),
+        
+        /* ring and other edgee */
+        radial-gradient(
+            circle,
+            transparent 0% 24%,
+            rgba(0, 0, 0, 0.35) 24.5% 33%,
+            rgba(255, 255, 255, 0.07) 33.5%,
+            transparent 34.5% 96%,
+            rgba(0, 0, 0, 0.4) 97% 100% 
+        ),
+        
+        /* grooves thingy (circles running out) */
+        repeating-radial-gradient(
+            circle,
+            rgba(0, 0, 0, 0.28) 0px,
+            rgba(0, 0, 0, 0.28) 1px,
+            rgba(255, 255, 255, 0.04) 1px,
+            rgba(255, 255, 255, 0.04) 3px
+        ),
 
-    border: 1px solid rgba(255, 255, 255, 0.08);
+        /* vinyl basee */
+        color-mix(in srgb, #080b14 82%, var(--card-bg));
+
+    border: 1px solid color-mix(in srgb, var(--text-color) 22%, transparent);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.32);
+    
     display: flex;
     justify-content: center;
     align-items: center;

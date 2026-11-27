@@ -1,7 +1,7 @@
 # changing the color pallet
 
-Ermm sooo I wanted to experiment with more colors sooo I decided to test different colors.. like
-```
+1) Ermm sooo I wanted to experiment with more colors sooo I decided to test different colors.. like
+```css
 [data-theme="dark"] {
     --bg-color: #160924;
     --card-bg: #231036;
@@ -16,7 +16,7 @@ Ermm sooo I wanted to experiment with more colors sooo I decided to test differe
 ```
 
 This
-```
+```css
 [data-theme="dark"] {
     --bg-color: #06161e;
     --card-bg: #0c232e;
@@ -31,7 +31,7 @@ This
 ```
 
 also this
-```
+```css
 :root, [data-theme="dark"] {
     --bg-color: #120d0c;
     --card-bg: #1e1614;
@@ -47,7 +47,7 @@ also this
 
 
 and finally the one which I liked isss
-```
+```css
 :root, [data-theme="dark"] {
     --bg-color: #090624;
     --card-bg: #13113b;
@@ -62,3 +62,60 @@ and finally the one which I liked isss
 ```
 
 This kinda gibes the premium and cool like vibess. Where the text pops up and kinda feels intentionalll designn
+
+2) Changing vinyl from song card:
+
+So the vinyl looks abit washed out sooo I decided to change it too.. and I started to play with value, with new styles and everything and at the end what worked was
+```css
+background:
+    /* light reflectionnn */
+    conic-gradient(
+        from 25deg,
+        transparent 0deg,
+        rgba(255, 255, 255, 0.16) 28deg,
+        rgba(255, 255, 255, 0.03) 55deg,
+        transparent 95deg,
+        transparent 180deg,
+        rgba(255, 255, 255, 0.16) 208deg,
+        rgba(255, 255, 255, 0.03) 235deg,
+        transparent 275deg
+    ),
+    
+    /* ring and other edgee */
+    radial-gradient(
+        circle,
+        transparent 0% 24%,
+        rgba(0, 0, 0, 0.35) 24.5% 33%,
+        rgba(255, 255, 255, 0.07) 33.5%,
+        transparent 34.5% 96%,
+        rgba(0, 0, 0, 0.4) 97% 100% 
+    ),
+    
+    /* grooves thingy (circles running out) */
+    repeating-radial-gradient(
+        circle,
+        rgba(0, 0, 0, 0.28) 0px,
+        rgba(0, 0, 0, 0.28) 1px,
+        rgba(255, 255, 255, 0.04) 1px,
+        rgba(255, 255, 255, 0.04) 3px
+    ),
+
+    /* vinyl basee */
+    color-mix(in srgb, #080b14 82%, var(--card-bg));
+```
+
+and in addition to this, i added:
+```css
+border: 1px solid color-mix(in srgb, var(--text-color) 22%, transparent);
+box-shadow: 0 8px 24px rgba(0, 0, 0, 0.32);
+```
+for box shadow and border... and noww it looks damn coolll
+
+![alt text](/images/image72.png)
+
+but the issue is the light mode, the text is not clear
+
+![alt text](/images/image73.png)
+
+3) Fixing the vinyl in light theme:
+
