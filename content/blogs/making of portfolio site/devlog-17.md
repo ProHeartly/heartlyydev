@@ -24,21 +24,39 @@ We can do this by either changing html which also changes for overall viewers bu
 3) Animationnnn timeee:
 So previously animations where made in context of horizontal layout so now, we have to translate that animation to vertical layoutt
 
+So it's basically left and right fly-in animations alternatingly placedd
+
 ```
 .row .card.a:not(.in-view),
 .row .card.b:not(.in-view),
-.row .card.c:not(.in-view),
 .row .card.g:not(.in-view),
 .row .card.j:not(.in-view) {
     opacity: 0;
-    transform: translateX(-100px);
+    transform: translateX(-200px);
 }
+
 .row .card.d:not(.in-view),
 .row .card.e:not(.in-view),
-.row .card.f:not(.in-view),
 .row .card.i:not(.in-view),
-.row .card.h:not(.in-view) {
+.row .card.h:not(.in-view)
+{
+    opacity: 0;
+    transform: translateX(200px);
+}
+
+.row .card.c:not(.in-view) {
+    opacity: 0;
+    transform: translateX(-100px);
+}
+
+.row .card.f:not(.in-view) {
     opacity: 0;
     transform: translateX(100px);
 }
 ```
+
+and there is a little different offset values for `.card.c` and `.card.f` cuz they are the two little cards of github and theme change, so if they are as far as other cards, they donnot cross the threshold of `animation.js` and never load, so i kept them just in the edge.
+
+**small fixes:**
+* the contact me page was getting glitched for some reason and i was trying random stuff, I still don't know what fixed it but when using `svh` as unit for `min-height` and using different settings of overflow eliminated it.
+* I added different value of pace and delay in `animation.js`, for mobile, they `--delay` remains 0 and `--pace` remains `0.5`
