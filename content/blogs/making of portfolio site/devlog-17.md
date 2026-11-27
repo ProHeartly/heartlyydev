@@ -60,3 +60,9 @@ and there is a little different offset values for `.card.c` and `.card.f` cuz th
 **small fixes:**
 * the contact me page was getting glitched for some reason and i was trying random stuff, I still don't know what fixed it but when using `svh` as unit for `min-height` and using different settings of overflow eliminated it.
 * I added different value of pace and delay in `animation.js`, for mobile, they `--delay` remains 0 and `--pace` remains `0.5`
+
+
+**ONE RANDOM CHANGE:**
+* so i wanted to remove the style of making the first letter of blog bigger and different font which sounds fancy and cool in theory but it looked just out of random addition so i just removed it.
+
+![alt text](/images/image71.png)

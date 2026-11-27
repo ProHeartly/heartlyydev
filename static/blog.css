@@ -256,15 +256,6 @@
     margin-top: 1em;
 }
 
-.article-body > p:first-of-type::first-letter {
-    float: left;
-    font-family: "Playfair Display", Georgia, serif;
-    font-weight: 900;
-    font-size: 4.4em;
-    padding-left: 8px;
-
-    line-height: 0.8;
-}
 
 .article-body h2,
 .article-body h3 {
