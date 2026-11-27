@@ -194,3 +194,11 @@ Now! i'm satisfied with how it looksss
 ```
 
 so here, the `card-bg` and `text-color` swaps on changing theme
+
+**404 page:**
+
+![alt text](/images/image76.png)
+
+this is the original one, here the orange thingy gives viewer a place to focus on, so following same color pallet, i came up with this combo
+
+![alt text](/images/image77.png)
