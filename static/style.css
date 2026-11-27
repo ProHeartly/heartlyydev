@@ -390,48 +390,71 @@ body {
 @media (max-width: 700px) {
     html,
     body {
-        height: 100%;
-        overflow: hidden;
-        overscroll-behavior: none;
+        height: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior: auto;
     }
 
     .main {
-        height: 100dvh;
+        height: auto;
+        min-height: 100dvh;
+        width: 100%;
         padding: 12px;
         gap: 12px;
 
-        scroll-snap-type: x proximity;
-        scroll-padding-left: 12px;
-        touch-action: pan-x;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        /* scroll-snap-type: x proximity;
+        scroll-padding-left: 12px; */
+        touch-action: pan-y;
     }
 
     .row {
-        height: calc(50dvh - 18px);
-        gap: 12px;
+        display: contents;
     }
 
-    .row:first-child .card {
+    /* .row:first-child .card {
         scroll-snap-align: start;
-    }
+    } */
 
     .card.a,
     .card.d,
     .card.e,
     .card.h {
-        width: 85vw;
+        width: 100%;
+        grid-column: 1 / -1;
+        height: auto;
+        padding: 24px 16px;
+        min-height: 40vh;
     }
 
     .card.b,
     .card.g,
     .card.i,
     .card.j {
-        width: 70vw;
+        width: 100%;
+        grid-column: 1 / -1;
+        height: auto;
+        padding: 24px 16px;
+        min-height: 40vh;
     }
 
     .card.c,
     .card.f {
-        width: 45vw;
+        grid-column: span 1;
+        width: 100%;
+        height: auto;
+        aspect-ratio:  1 / 1;
+        padding: 16px;
     }
+
+    /* .card.a {
+        min-height: 260px;
+    } */
 
     .card {
         padding: 16px;
@@ -478,6 +501,38 @@ body {
     .card.a .record-wrapper {
         transform: translateX(-140px) rotate(-100deg);
     }
+
+    .card.a { /* now playing thingy */
+        order: 1;
+    }
+    .card.d { /* about mee */
+        order: 2;
+    }
+    .card.b { /* my projects */
+        order: 3;
+    }
+    .card.e { /* blogs */
+        order: 4;
+    }
+    .card.c { /* github */
+        order: 5;
+    }
+    .card.f { /* theme toggle */
+        order: 6;
+    }
+    .card.g { /* my galleryy */
+        order: 7;
+    }
+    .card.i { /* dino game */
+        order: 8;
+    }
+    .card.j { /* leave your  mark */
+        order: 9;
+    }
+    .card.h { /* contact me */
+        order: 10;
+    }
+
 }
 
 
