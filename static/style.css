@@ -429,7 +429,7 @@ body {
         grid-column: 1 / -1;
         height: auto;
         padding: 24px 16px;
-        min-height: 40vh;
+        min-height: 35dvh;
     }
 
     .card.b,
@@ -440,7 +440,7 @@ body {
         grid-column: 1 / -1;
         height: auto;
         padding: 24px 16px;
-        min-height: 40vh;
+        min-height: 35dvh;
     }
 
     .card.c,
@@ -452,9 +452,9 @@ body {
         padding: 16px;
     }
 
-    /* .card.a {
+    .card.a {
         min-height: 260px;
-    } */
+    }
 
     .card {
         padding: 16px;
@@ -533,6 +533,22 @@ body {
         order: 10;
     }
 
+    .row .card.a:not(.in-view),
+    .row .card.b:not(.in-view),
+    .row .card.c:not(.in-view),
+    .row .card.g:not(.in-view),
+    .row .card.j:not(.in-view) {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    .row .card.d:not(.in-view),
+    .row .card.e:not(.in-view),
+    .row .card.f:not(.in-view),
+    .row .card.i:not(.in-view),
+    .row .card.h:not(.in-view) {
+        opacity: 0;
+        transform: translateX(100px);
+    }
 }
 
 
