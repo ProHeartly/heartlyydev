@@ -244,3 +244,31 @@ I tried changing same amount of difference as original color pallet
 The main thing that changed here is `--hr-color` which used to be white or black in light and dark theme respectively but now I made it like `--hr-color` as `--card-bg` from index's style and `--card-bg` of gallery (which is color of main text) to little darker shade of `--card-bg`
 
 ![alt text](/images/image78.png)
+
+**Leave your marks page:**
+
+Same here, I tried keeping the original colors same but changed few in terms of our new pallet, the `--note` was the main headache here and after experimenting with different shades, I came up with:
+
+```css
+:root, [data-theme="dark"] {
+    --bg-color: #070b1e;
+    --card-bg: #0f1738;
+    --text-color: #efd083;
+    --dot: #1b254f;
+    --note: #ffe680;
+    --note-ink: #241704;
+    --accent: #eb9c26;
+}
+
+[data-theme="light"] {
+    --bg-color: #faf7f0;
+    --card-bg: #efe9dc;
+    --text-color: #132257;
+    --dot: #dcd4c4;
+    --note: #ffe680;
+    --note-ink: #241704;
+    --accent: #b55d08;
+}
+```
+
+![alt text](/images/image79.png)
