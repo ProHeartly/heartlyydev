@@ -54,3 +54,7 @@ Added a check for if the app is running in development with `IS_DEV = "--dev" in
 **What changes with dev?? (this much for now):**
 * no more github resync every reload.
 * no more codes goes to mail, rather it just prints in terminal.
+
+4) Disabling /docs, /redoc and /openapi.json
+
+using `app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)` we can eliminate unnecessary site maps

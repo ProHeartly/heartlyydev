@@ -68,7 +68,11 @@ def send_mail(subject, body, reply_to=""):
             s.login("heartly@user.hackclub.app", MAIL_PASS)
             s.send_message(mail)
 
-app = FastAPI()
+app = FastAPI(
+    docs_url=None,
+    redoc_url=None,
+    openapi_url=None
+)
 app.add_middleware(SessionMiddleware, secret_key=os.environ.get("SESSION_SECRET"), max_age=None)
 
 
