@@ -70,6 +70,7 @@ app.mount("/photos", StaticFiles(directory="content/gallery"), name="photos")
 app.mount("/images", StaticFiles(directory="images"), name="images")
 
 src = Jinja2Templates(directory="src")
+src.env.globals["v"] = int(time.time())
 
 gallery_path = Path("content/gallery")
 caption_path = Path("content/caption.json")
