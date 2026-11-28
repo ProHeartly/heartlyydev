@@ -60,3 +60,11 @@ Added a check for if the app is running in development with `IS_DEV = "--dev" in
 using `app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)` we can eliminate unnecessary site maps
 
 5) Adding `/robots.txt`, `/favicon.ico`, `sitemap.xml` and `rss.xml` for blogs 
+
+Soo I added `robots,txt` which is like tells web crawlers and bots which parts of the site they can or cannot access.
+
+added `/favicon.ico` i mean it could be acessed via `meta.html` but with some browsers, bookmark managers and RSS readers, it gave 404 so I added it as a route
+
+added `sitemap.xml`: this is basically list of all publicly available pages
+
+added `rss.xml` which is like blog feed for whoever wanna have updates via RSS readers wherever I post ;D
