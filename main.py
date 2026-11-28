@@ -241,6 +241,10 @@ async def static_cache(request: Request, call_next):
 def index(request: Request):
     return src.TemplateResponse(request=request, name="index.html")
 
+@app.get("/favicon.ico")
+def favicon():
+    return FileResponse("/static/favicon.png")
+
 @app.get("/robots.txt", response_class=PlainTextResponse)
 def robots():
     return (
