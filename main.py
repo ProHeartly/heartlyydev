@@ -256,6 +256,36 @@ def robots():
         "Sitemap: https://heartlyy.dev/sitemap.xml\n"
     )    
 
+
+@app.get("/sitemap.xml")
+def sitemap():
+    SITE = "https://heartlyy.dev"
+    def url(path, date=None):
+        lastmod = f"<lastmod>{date}</lastmod>" if date else ""
+        return f"<url><loc>{SITE}{path}</loc>{lastmod}</url>"
+
+    pages = ["/", "/about", "/projects", "/blogs", "/gallery", "/notes", "/contact", "/dino"]
+    urls = [url(p) for p in pages]
+
+    for folder in sorted(blogs_dir.iterdir()):
+        if not folder.is_dir():
+            continue
+
+        posts = get_posts(folder)
+        newest = max((p["date"] for p in posts if p["date"]), default=None)
+        urls.append(url(f"/blogs/{folder.name}", newest))
+        for p in posts:
+            urls.append(url(f"/blogs/{folder.name}/{p['slug']}", p["date"]))
+
+    xml = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + "\n".join(urls)
+        + "\n</urlset>"
+    )
+
+    return Response(xml, media_type="application/xml")
+
 @app.get("/about")
 def about(request: Request):
     return src.TemplateResponse(request=request, name="about.html")
