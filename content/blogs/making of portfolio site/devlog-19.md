@@ -24,4 +24,17 @@ using this `no-cache` and `must-revalidate` headers makes so that browser looks 
 
 **PROBLEMMMM:** It should have workedd in theoryyy but dk why it didn't work in my case, as soon as I removed html part, my mobile version went back to very old version.. the horizontal layout one (very old version), I even tried purging the cache in cloudflare and even invalidate everything option but no luckkk
 
-**Anotherrr fixx:**
+**Anotherrr fixx:** Hmmm what I thought was if somehow we could add the `?v={{ v }}` thingy without replacing every html.
+
+`@app.middleware("http")` this registers a wrapper function in fastapi that intercepts every incomming HTTP request before it reaches routes and every outgoing response before it goes back to browser.
+
+then I checked for `text/html` which means we are only looking for the `/static/*.css` or `/static/*.js` and we further isolate the search with `r'(/static/[^"\']+\.(?:css|js))(?=["\'])'`, which might look complex at first but simply:
+
+* find something that starts with `/static/`
+* keep going until it hits quote (" or ') which is checked by `[^"\']+` part
+* it must end in `.css` or `.js`
+* and the next character has to be a quote (so it only takes the exact url) and also its done with lookahead: `(?=["\'])` so it checks but doesn't include it
+
+with this thingy, `/static/style.css` gets matched but `/static/logo.png` doesn't..
+
+then finally, `rf'\1?v={BOOT_V}'` this puts the `?v=` thingy for rechecking cachee
