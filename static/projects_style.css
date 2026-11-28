@@ -1,7 +1,7 @@
 :root, [data-theme="dark"] {
-    --bg-color: #09002f;
-    --card-bg: #120b3d;
-    --text-color: #a1b1ff;
+    --bg-color: #070b1e;
+    --card-bg: #0f1738;
+    --text-color: #efd083;
 }
 
 ::view-transition-old(root),
@@ -11,9 +11,9 @@
 }
 
 [data-theme="light"] {
-    --bg-color: #f4f5fc;
-    --card-bg: #cfd3ff;
-    --text-color: #004EB9;
+    --bg-color: #faf7f0;
+    --card-bg: #efe9dc;
+    --text-color: #132257;
 }
 
 * {
