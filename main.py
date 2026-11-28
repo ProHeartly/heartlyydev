@@ -15,6 +15,8 @@ import re
 import threading
 import hashlib
 
+import sys
+IS_DEV = "--dev" in sys.argv
 
 from markdown_it import MarkdownIt
 md = MarkdownIt("commonmark").enable(["table", "strikethrough"])
@@ -34,6 +36,10 @@ code_time = 0
 
 # this sends the code to given mail
 def send_code(to, code):
+    if IS_DEV:
+        print(f"* CODE for {to}: {code}")
+        return
+    
     msg = EmailMessage()
     msg["Subject"] = f"Code for heartlyy.dev"
     msg["From"] = "heartly@user.hackclub.app"
@@ -489,8 +495,9 @@ def sync_loop():
             pass
         time.sleep(3600)
 
-threading.Thread(target=sync_loop, daemon=True).start()
+if not IS_DEV:
+    threading.Thread(target=sync_loop, daemon=True).start()
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=IS_DEV)

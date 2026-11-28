@@ -1,4 +1,4 @@
-# Fixes
+# Fixes and some very much needed QOLs
 
 1) The caching on mobiles are very subborn.. like IT WASN'T updating no matter what i didd.... so i implemented a server side fixx
 
@@ -46,3 +46,11 @@ In dark theme, when the album cover of song was yellow colored, then the text wo
 **small fix:** I also made the text size smaller so most text fits.
 
 ![alt text](/images/image81.png)
+
+3) Production vs Development:
+
+Added a check for if the app is running in development with `IS_DEV = "--dev" in sys.argv`, this checks for `--dev` arg when user ran the file. Like in production, we just run `python main.py` and in devlopment, we run: `python main.py --dev`
+
+**What changes with dev?? (this much for now):**
+* no more github resync every reload.
+* no more codes goes to mail, rather it just prints in terminal.
