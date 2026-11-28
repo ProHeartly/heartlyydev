@@ -65,12 +65,18 @@ def send_mail(subject, body, reply_to=""):
 app = FastAPI()
 app.add_middleware(SessionMiddleware, secret_key=os.environ.get("SESSION_SECRET"), max_age=None)
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
+
+class RevalidateStaticFiles(StaticFiles):
+    async def get_response(self, path, scope):
+        response = await super().get_response(path, scope)
+        response.headers["Cache-Control"] = "no-cache, must-revalidate"
+        return response
+
+app.mount("/static", RevalidateStaticFiles(directory="static"), name="static")
 app.mount("/photos", StaticFiles(directory="content/gallery"), name="photos")
 app.mount("/images", StaticFiles(directory="images"), name="images")
 
 src = Jinja2Templates(directory="src")
-src.env.globals["v"] = int(time.time())
 
 gallery_path = Path("content/gallery")
 caption_path = Path("content/caption.json")
