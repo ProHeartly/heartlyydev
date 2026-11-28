@@ -6,7 +6,7 @@ from pathlib import Path
 from fastapi import FastAPI, Request, UploadFile, File, Form, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import RedirectResponse, FileResponse, JSONResponse
+from fastapi.responses import RedirectResponse, FileResponse, JSONResponse, Response
 import json
 import urllib.request
 import urllib.parse
@@ -204,6 +204,28 @@ def already_posted(email):
 
 def oops(error):
     return {"ok": False, "error": error}
+
+BOOT_V = int(time.time())
+
+@app.middleware("http")
+async def static_cache(request: Request, call_next):
+    response = await call_next(request)
+    if "text/html" in response.headers.get("content-type", ""):
+        body = b"".join([chunk async for chunk in response.body_iterator])
+        html = re.sub(
+            r'(/static/[^"\']+\.(?:css|js))(?=["\'])',
+            rf'\1?v={BOOT_V}',
+            body.decode("utf-8")
+        )
+        headers = dict(response.headers)
+        headers.pop("content-length", None)
+        return Response(
+            content=html,
+            status_code=response.status_code,
+            headers=headers,
+            media_type="text/html"
+        )
+    return response
 
 @app.get("/")
 def index(request: Request):

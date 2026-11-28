@@ -21,3 +21,7 @@ app.mount("/static", RevalidateStaticFiles(directory="static"), name="static")
 ```
 
 using this `no-cache` and `must-revalidate` headers makes so that browser looks for any update in resource.
+
+**PROBLEMMMM:** It should have workedd in theoryyy but dk why it didn't work in my case, as soon as I removed html part, my mobile version went back to very old version.. the horizontal layout one (very old version), I even tried purging the cache in cloudflare and even invalidate everything option but no luckkk
+
+**Anotherrr fixx:**
