@@ -59,4 +59,4 @@ Added a check for if the app is running in development with `IS_DEV = "--dev" in
 
 using `app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)` we can eliminate unnecessary site maps
 
-5) Adding `/robots.txt`, `/favicon.ico` and `sitemap.xml`
+5) Adding `/robots.txt`, `/favicon.ico`, `sitemap.xml` and `rss.xml` for blogs 

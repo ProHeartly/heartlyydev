@@ -1,7 +1,9 @@
 import os
 import time
 import secrets
-from datetime import date
+from datetime import date, datetime, timezone
+from email.utils import format_datetime
+from html import escape
 from pathlib import Path
 from fastapi import FastAPI, Request, UploadFile, File, Form, HTTPException
 from fastapi.staticfiles import StaticFiles
@@ -285,6 +287,53 @@ def sitemap():
     )
 
     return Response(xml, media_type="application/xml")
+
+@app.get("/rss.xml")
+def rss_feed():
+    all_posts = []
+    for folder in blogs_dir.iterdir():
+        if folder.is_dir():
+            for post in get_posts(folder):
+                post["board"] = folder.name
+                all_posts.append(post)
+
+    all_posts.sort(
+        key=lambda p: (p["date"], natural_sorting(p["slug"])),
+        reverse=True
+    )
+
+    items = []
+    for p in all_posts[:20]:
+        url = f"https://heartlyy.dev/blogs/{p['board']}/{p['slug']}"
+        pub_date = ""
+        if p['date']:
+            try:
+                dt = datetime.strptime(p["date"], "%Y-%m-%d").replace(tzinfo=timezone.utc)
+                pub_date = f"<pubDate>{format_datetime(dt)}</pubDate>"
+            except ValueError:
+                pass
+
+        items.append(
+            f"<item>"
+            f"<title>{escape(p['title'])}</title>"
+            f"<link>{url}</link>"
+            f"<guid>{url}</guid>"
+            f"{pub_date}"
+            f"<description>{escape(p['summary'])}</description>"
+            f"</item>"
+        )
+
+    xml = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<rss version="2.0"><channel>'
+        '<title>Heartlyy — Blog</title>'
+        '<link>https://heartlyy.dev/blogs</link>'
+        '<description>Posts and devlogs by Rasim</description>'
+        + "".join(items)
+        + "</channel></rss>"
+    )
+    return Response(content=xml, media_type="application/rss+xml")
+
 
 @app.get("/about")
 def about(request: Request):
