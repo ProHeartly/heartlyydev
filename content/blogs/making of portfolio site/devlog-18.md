@@ -236,3 +236,5 @@ I tried changing same amount of difference as original color pallet
 ```
 
 **another small change:** As i was in contact page, i noticed a thing which i was thinking of changing from a long time, the order of things like originally, github was the first thing that was on default but not i changed that to msg me so people can quickly contact mee
+
+**Dino page:** It used same variables as main page so i just replaced values of them. *But* I didn't change the game colors cuz it looks good as it is.
