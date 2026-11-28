@@ -38,3 +38,11 @@ then I checked for `text/html` which means we are only looking for the `/static/
 with this thingy, `/static/style.css` gets matched but `/static/logo.png` doesn't..
 
 then finally, `rf'\1?v={BOOT_V}'` this puts the `?v=` thingy for rechecking cachee
+
+2) Fixed the text not being readable in the `.record` thingy
+
+In dark theme, when the album cover of song was yellow colored, then the text would be unreadable soo for fixing it, I added `filter: brightness(0.5) contrast(1.1);` to `.label` which makes the album art little darker. And I also added `filter: drop-shadow(0 2px 4px rgba(7, 11, 30, 0.95));` to `.track-front` which is the text on front, so now it's moree visible with those drop shadows
+
+**small fix:** I also made the text size smaller so most text fits.
+
+![alt text](/images/image81.png)
