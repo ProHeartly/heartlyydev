@@ -1,13 +1,13 @@
 const email = ["rasimmahatoo", "gmail.com"].join("@") // put together like this so scrapers cannot spam it ;-;
 
 const contacts = [
+    { name: "msg me", icon: "ph-chat-circle-dots", handle: "straight to my inbox", act: "write", message: true },
     { name: "github", icon: "ph-github-logo", handle: "@ProHeartly", act: "link", link: "https://github.com/proheartly" },
     { name: "mail", icon: "ph-envelope-simple", handle: email, act: "copy", copy: email },
     { name: "hackatime", icon: "ph-timer", handle: "my coding hours", act: "link", link: "https://hackatime.hackclub.com/@rasim" },
     { name: "linkedin", icon: "ph-linkedin-logo", handle: "Rasim", act: "link", link: "https://www.linkedin.com/in/heartly/" },
     { name: "discord", icon: "ph-discord-logo", handle: "@heartlyplayz", act: "link", link: "https://discord.com/users/878215711779090443" },
-    { name: "hackclub slack", icon: "ph-slack-logo", handle: "@Heartly", act: "link", link: "https://hackclub.enterprise.slack.com/team/U0A4016A14N" },
-    { name: "msg me", icon: "ph-chat-circle-dots", handle: "straight to my inbox", act: "write", message: true }
+    { name: "hackclub slack", icon: "ph-slack-logo", handle: "@Heartly", act: "link", link: "https://hackclub.enterprise.slack.com/team/U0A4016A14N" }
 ];
 
 const dial = document.querySelector(".dial");

@@ -1,27 +1,27 @@
 :root, [data-theme="dark"] {
-    --bg-color: #09002f;
-    --card-bg: #120b3d;
-    --text-color: #a1b1ff;
-    --ring: #1a1250;
-    --hole: #0b0436;
-    --hole-ink: #5d68b0;
-    --pointer: #a1b1ff;
-    --accent: #a1b1ff;
-    --shadow: rgba(0, 0, 0, 0.45);
-    --edge: rgba(161, 177, 255, 0.12);
+    --bg-color: #070b1e;
+    --card-bg: #0f1738;
+    --text-color: #efd083;
+    --ring: #131b42;
+    --hole: #090e26;
+    --hole-ink: #a09060;
+    --pointer: #efd083;
+    --accent: #efd083;
+    --shadow: rgba(0, 0, 0, 0.6);
+    --edge: rgba(239, 208, 131, 0.16);
 }
 
 [data-theme="light"] {
-    --bg-color: #f4f5fc;
-    --card-bg: #dfe3ff;
-    --text-color: #004EB9;
-    --ring: #bfc5fb;
-    --hole: #f4f5fc;
-    --hole-ink: #7486cf;
-    --pointer: #004EB9;
-    --accent: #004EB9;
-    --shadow: rgba(0, 78, 185, 0.25);
-    --edge: rgba(0, 78, 185, 0.18);
+    --bg-color: #faf7f0;
+    --card-bg: #efe9dc;
+    --text-color: #132257;
+    --ring: #e0d7c5;
+    --hole: #faf7f0;
+    --hole-ink: #7d86a8;
+    --pointer: #132257;
+    --accent: #132257;
+    --shadow: rgba(19, 34, 87, 0.25);
+    --edge: rgba(19, 34, 87, 0.18);
 }
 
 ::view-transition-old(root),

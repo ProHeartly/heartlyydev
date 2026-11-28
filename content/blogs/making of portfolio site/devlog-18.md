@@ -202,3 +202,37 @@ so here, the `card-bg` and `text-color` swaps on changing theme
 this is the original one, here the orange thingy gives viewer a place to focus on, so following same color pallet, i came up with this combo
 
 ![alt text](/images/image77.png)
+
+**Contact page:**
+
+I tried changing same amount of difference as original color pallet
+
+```css
+:root, [data-theme="dark"] {
+    --bg-color: #070b1e;
+    --card-bg: #0f1738;
+    --text-color: #efd083;
+    --ring: #131b42;
+    --hole: #090e26;
+    --hole-ink: #a09060;
+    --pointer: #efd083;
+    --accent: #efd083;
+    --shadow: rgba(0, 0, 0, 0.6);
+    --edge: rgba(239, 208, 131, 0.16);
+}
+
+[data-theme="light"] {
+    --bg-color: #faf7f0;
+    --card-bg: #efe9dc;
+    --text-color: #132257;
+    --ring: #e0d7c5;
+    --hole: #faf7f0;
+    --hole-ink: #7d86a8;
+    --pointer: #132257;
+    --accent: #132257;
+    --shadow: rgba(19, 34, 87, 0.25);
+    --edge: rgba(19, 34, 87, 0.18);
+}
+```
+
+**another small change:** As i was in contact page, i noticed a thing which i was thinking of changing from a long time, the order of things like originally, github was the first thing that was on default but not i changed that to msg me so people can quickly contact mee
