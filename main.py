@@ -6,7 +6,7 @@ from pathlib import Path
 from fastapi import FastAPI, Request, UploadFile, File, Form, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import RedirectResponse, FileResponse, JSONResponse, Response
+from fastapi.responses import RedirectResponse, FileResponse, JSONResponse, Response, PlainTextResponse
 import json
 import urllib.request
 import urllib.parse
@@ -240,6 +240,17 @@ async def static_cache(request: Request, call_next):
 @app.get("/")
 def index(request: Request):
     return src.TemplateResponse(request=request, name="index.html")
+
+@app.get("/robots.txt", response_class=PlainTextResponse)
+def robots():
+    return (
+        "User-agent: *\n"
+        "Allow: /\n"
+        "Disallow: /gallery-upload\n"
+        "Disallow: /api\n"
+        "Disallow: /notes/accept/\n\n"
+        "Sitemap: https://heartlyy.dev/sitemap.xml\n"
+    )    
 
 @app.get("/about")
 def about(request: Request):

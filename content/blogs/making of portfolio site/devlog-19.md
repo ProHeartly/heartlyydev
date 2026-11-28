@@ -58,3 +58,5 @@ Added a check for if the app is running in development with `IS_DEV = "--dev" in
 4) Disabling /docs, /redoc and /openapi.json
 
 using `app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)` we can eliminate unnecessary site maps
+
+5) Adding `/robots.txt`, `/favicon.ico`
