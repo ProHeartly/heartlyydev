@@ -272,3 +272,52 @@ Same here, I tried keeping the original colors same but changed few in terms of 
 ```
 
 ![alt text](/images/image79.png)
+
+**Projectsss pageee:**
+Basically.. it had same as index page color pallet variables so changing it was not a challenge but as I was looking at it, I thought of changing the color pallet of books too (to make them look solid and polished)
+
+![alt text](/images/image80.png)
+
+**Color pallet:**
+```css
+.book:nth-child(7n + 1) { --w: 56px; --h: 300px; --color: #6e2b35; --ink: #f3e6cc; }
+.book:nth-child(7n + 2) { --w: 44px; --h: 260px; --color: #c9943e; --ink: #1e1406; }
+.book:nth-child(7n + 3) { --w: 70px; --h: 320px; --color: #1c2d5e; --ink: #efd083; }
+.book:nth-child(7n + 4) { --w: 50px; --h: 280px; --color: #e6dcc8; --ink: #1b2238; }
+.book:nth-child(7n + 5) { --w: 62px; --h: 245px; --color: #a84932; --ink: #f7ebd4; }
+.book:nth-child(7n + 6) { --w: 42px; --h: 310px; --color: #264d3b; --ink: #e8dec8; }
+.book:nth-child(7n + 7) { --w: 58px; --h: 270px; --color: #4f5d75; --ink: #f4ead5; }
+```
+Here, I used `7n + {term}` to denote 7 different shades. and for **Font styles**, i used 4 different styles to further boost the variations
+
+```css
+.book:nth-child(4n + 1) .side span {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    font-size: 1.05rem;
+}
+
+.book:nth-child(4n + 3) .side span {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    text-transform: none;
+    font-size: 1.4rem;
+}
+
+.book:nth-child(4n + 2) .side span {
+    font-family: 'Instrument Serif', serif;
+    text-transform: none;
+    letter-spacing: 0.03em;
+    font-size: 1.75rem;
+}
+
+.book:nth-child(4n + 4) .side span {
+    font-family: 'Courier Prime', monospace;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    font-size: 1.4rem;
+}
+```
+(with different styles, font sizes, font family, letter spacing and even text-transform)

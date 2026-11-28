@@ -98,7 +98,7 @@ h1 {
     --w: 56px;
     --h: 300px;
     --cover: 260px;
-    --color: #533ede;
+    --color: #6e2b35;
     --ink: #f4f5fc;
 
     width: var(--w);
@@ -219,19 +219,43 @@ h1 {
 
 /* every books looks a bit different from other and it repeats every 7 books */
 
-.book:nth-child(7n + 1) { --w: 56px; --h: 300px; --color: #533ede; }
-.book:nth-child(7n + 2) { --w: 44px; --h: 260px; --color: #e8a33d; --ink: #2a1a05; }
-.book:nth-child(7n + 3) { --w: 70px; --h: 320px; --color: #004EB9; }
-.book:nth-child(7n + 4) { --w: 50px; --h: 280px; --color: #f4f5fc; --ink: #09002f; }
-.book:nth-child(7n + 5) { --w: 62px; --h: 245px; --color: #d9566b; }
-.book:nth-child(7n + 6) { --w: 42px; --h: 310px; --color: #2f7d4f; }
-.book:nth-child(7n + 7) { --w: 58px; --h: 270px; --color: #a1b1ff; --ink: #09002f; }
+.book:nth-child(7n + 1) { --w: 56px; --h: 300px; --color: #6e2b35; --ink: #f3e6cc; }
+.book:nth-child(7n + 2) { --w: 44px; --h: 260px; --color: #c9943e; --ink: #1e1406; }
+.book:nth-child(7n + 3) { --w: 70px; --h: 320px; --color: #1c2d5e; --ink: #efd083; }
+.book:nth-child(7n + 4) { --w: 50px; --h: 280px; --color: #e6dcc8; --ink: #1b2238; }
+.book:nth-child(7n + 5) { --w: 62px; --h: 245px; --color: #a84932; --ink: #f7ebd4; }
+.book:nth-child(7n + 6) { --w: 42px; --h: 310px; --color: #264d3b; --ink: #e8dec8; }
+.book:nth-child(7n + 7) { --w: 58px; --h: 270px; --color: #4f5d75; --ink: #f4ead5; }
 
 /* different fonts on the sides of the look, like a real mixed bookshelf */
-.book:nth-child(7n + 2) .side span { font-family: "Playfair Display", serif; font-style: italic; text-transform: none; }
-.book:nth-child(7n + 3) .side span { font-family: "UnifrakturMaguntia", serif; text-transform: none; font-size: 1.6rem; }
-.book:nth-child(7n + 4) .side span { font-family: "Space Mono", monospace; font-size: 0.95rem; }
-.book:nth-child(7n + 6) .side span { font-weight: 300; letter-spacing: 0.2em; font-size: 0.95rem; }
+.book:nth-child(4n + 1) .side span {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    font-size: 1.05rem;
+}
+
+.book:nth-child(4n + 3) .side span {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    text-transform: none;
+    font-size: 1.4rem;
+}
+
+.book:nth-child(4n + 2) .side span {
+    font-family: 'Instrument Serif', serif;
+    text-transform: none;
+    letter-spacing: 0.03em;
+    font-size: 1.75rem;
+}
+
+.book:nth-child(4n + 4) .side span {
+    font-family: 'Courier Prime', monospace;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    font-size: 1.4rem;
+}
 
 @media (max-width: 700px) {
     .top {
